@@ -1,0 +1,683 @@
+/* root files  */
+:root {
+  --contentColor: #383838;
+  --sky-blue: #00ADEE;
+  --white: #ffffff;
+}
+
+
+/* =======================================================================================  */
+@font-face {
+  font-family: 'FuturaPT-Medium';
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/FuturaPT-Medium.woff");
+}
+
+@font-face {
+  font-family: 'FuturaPT-Book';
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/FuturaPT-Book.woff");
+
+}
+
+/* =====================================================================================   */
+
+
+* {
+  margin: 0;
+  padding: 0;
+}
+#Loader  {
+   backdrop-filter:transparent; 
+}
+.modal-content {
+	border-radius:0.7rem!important;
+}
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+	z-index:99999!important
+}
+.row1{
+	    --bs-gutter-x: -0.5rem!important;
+}
+.dank-ass-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dank-ass-loader .row {
+  display: flex;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  margin: 0 -6px;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 21.6px solid #fd7000;
+  -webkit-animation: blink 1s infinite;
+          animation: blink 1s infinite;
+  filter: drop-shadow(0 0 18px #fd7000);
+}
+.arrow.down {
+  transform: rotate(180deg);
+}
+.arrow.outer-1 {
+  -webkit-animation-delay: -0.0555555556s;
+          animation-delay: -0.0555555556s;
+}
+.arrow.outer-2 {
+  -webkit-animation-delay: -0.1111111111s;
+          animation-delay: -0.1111111111s;
+}
+.arrow.outer-3 {
+  -webkit-animation-delay: -0.1666666667s;
+          animation-delay: -0.1666666667s;
+}
+.arrow.outer-4 {
+  -webkit-animation-delay: -0.2222222222s;
+          animation-delay: -0.2222222222s;
+}
+.arrow.outer-5 {
+  -webkit-animation-delay: -0.2777777778s;
+          animation-delay: -0.2777777778s;
+}
+.arrow.outer-6 {
+  -webkit-animation-delay: -0.3333333333s;
+          animation-delay: -0.3333333333s;
+}
+.arrow.outer-7 {
+  -webkit-animation-delay: -0.3888888889s;
+          animation-delay: -0.3888888889s;
+}
+.arrow.outer-8 {
+  -webkit-animation-delay: -0.4444444444s;
+          animation-delay: -0.4444444444s;
+}
+.arrow.outer-9 {
+  -webkit-animation-delay: -0.5s;
+          animation-delay: -0.5s;
+}
+.arrow.outer-10 {
+  -webkit-animation-delay: -0.5555555556s;
+          animation-delay: -0.5555555556s;
+}
+.arrow.outer-11 {
+  -webkit-animation-delay: -0.6111111111s;
+          animation-delay: -0.6111111111s;
+}
+.arrow.outer-12 {
+  -webkit-animation-delay: -0.6666666667s;
+          animation-delay: -0.6666666667s;
+}
+.arrow.outer-13 {
+  -webkit-animation-delay: -0.7222222222s;
+          animation-delay: -0.7222222222s;
+}
+.arrow.outer-14 {
+  -webkit-animation-delay: -0.7777777778s;
+          animation-delay: -0.7777777778s;
+}
+.arrow.outer-15 {
+  -webkit-animation-delay: -0.8333333333s;
+          animation-delay: -0.8333333333s;
+}
+.arrow.outer-16 {
+  -webkit-animation-delay: -0.8888888889s;
+          animation-delay: -0.8888888889s;
+}
+.arrow.outer-17 {
+  -webkit-animation-delay: -0.9444444444s;
+          animation-delay: -0.9444444444s;
+}
+.arrow.outer-18 {
+  -webkit-animation-delay: -1s;
+          animation-delay: -1s;
+}
+.arrow.inner-1 {
+  -webkit-animation-delay: -0.1666666667s;
+          animation-delay: -0.1666666667s;
+}
+.arrow.inner-2 {
+  -webkit-animation-delay: -0.3333333333s;
+          animation-delay: -0.3333333333s;
+}
+.arrow.inner-3 {
+  -webkit-animation-delay: -0.5s;
+          animation-delay: -0.5s;
+}
+.arrow.inner-4 {
+  -webkit-animation-delay: -0.6666666667s;
+          animation-delay: -0.6666666667s;
+}
+.arrow.inner-5 {
+  -webkit-animation-delay: -0.8333333333s;
+          animation-delay: -0.8333333333s;
+}
+.arrow.inner-6 {
+  -webkit-animation-delay: -1s;
+          animation-delay: -1s;
+}
+
+@-webkit-keyframes blink {
+  0% {
+    opacity: 0.1;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.1;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+@media(min-width:992px) {
+  /* .modal:nth-of-type(even) {
+        z-index: 1052 !important;
+    }
+
+    .modal-backdrop.show:nth-of-type(even) {
+        z-index: 1051 !important;
+        backdrop-filter: blur(5px);
+    } */
+
+  /* --------- Save Modal  -------------- */
+  .saveModal .modal-dialog {
+    height: 200px;
+    width: 300px;
+    font-family: FuturaPT-Book;
+  }
+
+  .saveModal .saveAnimation {
+    height: 110px;
+    width: 110px;
+    font-family: FuturaPT-Book;
+    font-size: 16px;
+  }
+
+  .saveModal .saveText {
+    font-family: FuturaPT-Book;
+    font-size: 16px;
+    color: var(--contentColor);
+  }
+
+  .saveModal .saveOk {
+    height: 35px;
+    width: 60px;
+    padding: 5px 10px;
+    background: var(--sky-blue);
+    color: var(--white);
+    margin: 10px 0 0 0;
+  }
+
+  /* --------- Save Modal  -------------- */
+
+  /* --------- Update Modal  -------------- */
+  .updateModal .modal-dialog {
+    height: 200px;
+    width: 300px;
+    font-family: FuturaPT-Book;
+  }
+
+  .updateModal .modal-content {
+    height: auto;
+    width: 300px;
+    margin-left: 0;
+  }
+
+  .updateModal .updateAnimation {
+    height: 110px;
+    width: 110px;
+    font-family: FuturaPT-Book;
+    font-size: 16px;
+  }
+
+  .updateModal .updateText {
+    font-family: FuturaPT-Book;
+    font-size: 16px;
+    color: var(--contentColor);
+  }
+
+  .updateModal .updateOk {
+    height: 35px;
+    width: 60px;
+    padding: 5px 10px;
+    background: var(--sky-blue);
+    color: var(--white);
+    margin: 10px 0 0 0;
+  }
+
+  /* --------- Update Modal  -------------- */
+
+  /* --------- Delete Confirmation Modal  -------------- */
+  .delConfirmModal .modal-dialog {
+    height: 200px;
+    width: 300px;
+    font-family: FuturaPT-Book;
+  }
+
+  .delConfirmModal .modal-content {
+    height: auto;
+    width: 300px;
+    margin-left: 0;
+  }
+
+
+  .delConfirmModal .deleteText:nth-child(1) {
+    font-family: FuturaPT-Book;
+    font-size: 20px;
+    color: var(--contentColor);
+  }
+
+  .delConfirmModal .deleteText:nth-child(2) {
+    font-family: FuturaPT-Book;
+    font-size: 24px;
+    color: var(--contentColor);
+  }
+
+  .delConfirmModal .confrimNo {
+    height: 35px;
+    width: 60px;
+    padding: 5px 10px;
+    background: var(--sky-blue);
+    color: var(--white);
+    margin: 10px 0 0 0;
+  }
+
+  .delConfirmModal .ConfirmYes {
+    height: 35px;
+    width: 60px;
+    padding: 5px 10px;
+    background: var(--white);
+    color: var(--sky-blue);
+    border: 1px solid var(--sky-blue);
+    margin: 10px 0 0 0;
+  }
+
+  .delConfirmModal .buttons-group {
+    padding-bottom: 10px;
+  }
+
+  /* --------- Delete Confirmation Modal  -------------- */
+
+  /* --------- Delete Modal  -------------- */
+  .deleteModal .modal-dialog {
+    height: 200px;
+    width: 300px;
+    font-family: FuturaPT-Book;
+  }
+
+  .deleteModal .modal-content {
+    height: auto;
+    width: 300px;
+    margin-left: 0;
+  }
+
+
+  .deleteModal .deleteAnimation {
+    height: 110px;
+    width: 110px;
+    font-family: FuturaPT-Book;
+    font-size: 16px;
+  }
+
+  .deleteModal .deleteText {
+    font-family: FuturaPT-Book;
+    font-size: 16px;
+    color: var(--contentColor);
+  }
+
+  .deleteModal .deleteOk {
+    height: 35px;
+    width: 60px;
+    padding: 5px 10px;
+    background: var(--sky-blue);
+    color: var(--white);
+    margin: 10px 0 0 0;
+  }
+
+  /* --------- Delete Modal  -------------- */
+
+  /* --------- Can't Delete Modal  -------------- */
+  .cantDeleteModal .modal-dialog {
+    height: 200px;
+    width: 300px;
+    font-family: FuturaPT-Book;
+    z-index: 1000;
+  }
+
+  .cantDeleteModal .modal-content {
+    height: auto;
+    width: 300px;
+    margin-left: 0;
+  }
+
+
+  .cantDeleteModal .WarningAnimation {
+    height: 110px;
+    width: 110px;
+    font-family: FuturaPT-Book;
+    font-size: 16px;
+  }
+
+  .cantDeleteModal .WarningText {
+    font-family: FuturaPT-Book;
+    font-size: 24px;
+    color: var(--contentColor);
+  }
+
+  .cantDeleteModal .warningOk {
+    height: 35px;
+    width: 60px;
+    padding: 5px 10px;
+    background: var(--sky-blue);
+    color: var(--white);
+    margin: 10px 0 0 0;
+  }
+
+
+  /* --------- Can't Delete Modal  -------------- */
+
+  /* --------- Error Occured Modal  -------------- */
+  .errorModal .modal-dialog {
+    height: 200px;
+    width: 300px;
+    font-family: FuturaPT-Book;
+  }
+
+  .errorModal .modal-content {
+    height: auto;
+    width: 300px;
+    margin-left: 0;
+  }
+
+
+  .errorModal .WarningAnimation {
+    height: 110px;
+    width: 110px;
+    font-family: FuturaPT-Book;
+    font-size: 16px;
+  }
+
+  .errorModal .WarningText {
+    font-family: FuturaPT-Book;
+    font-size: 24px;
+    color: var(--contentColor);
+    text-align: center;
+  }
+
+  .errorModal .warningOk {
+    height: 35px;
+    width: 60px;
+    padding: 5px 10px;
+    background: var(--sky-blue);
+    color: var(--white);
+    margin: 10px 0 0 0;
+  }
+
+
+  /* --------- Error Occured Modal  -------------- */
+
+
+
+  /* ---------------- Common Alert messages ------------------- */
+  /* ---------  *** Input Errors ***  ---------    */
+
+  .inputErrorModal .modal-dialog {
+    height: 250px !important;
+    width: 300px !important;
+    font-family: FuturaPT-Book;
+    z-index: 1000;
+    text-align: center;
+  }
+
+  .inputErrorModal .modal-content {
+    height: 250px;
+    width: 300px;
+    margin-left: 0;
+  }
+
+  .inputErrorModal .inptWarningAnimation {
+    height: 110px;
+    width: 110px;
+    font-family: FuturaPT-Book;
+    font-size: 16px;
+  }
+
+  .inputErrorModal .inputWarningText {
+    font-family: FuturaPT-Book;
+    font-size: 24px;
+    color: var(--contentColor);
+  }
+
+  .inputErrorModal .inputwarningOk {
+    height: 35px;
+    width: 60px;
+    padding: 5px 10px;
+    background: var(--sky-blue);
+    color: var(--white);
+    margin: 10px 0 0 0;
+  }
+
+  /* ---------------- Common Alert messages End ------------------- */
+
+
+}
+
+/* Added Loader Css */
+
+.preloader {
+  display: flex;
+}
+
+
+
+.preloader {
+  animation: tiltSpin 8s linear infinite;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 17em;
+  height: 17em;
+}
+
+.preloader,
+.preloader__ring {
+  transform-style: preserve-3d;
+}
+
+.preloader__ring {
+  animation-name: spin;
+  animation-duration: 4s;
+  animation-timing-function: inherit;
+  animation-iteration-count: inherit;
+  font-size: 2em;
+  position: relative;
+  height: 3rem;
+  width: 1.5rem;
+}
+
+.preloader__ring:nth-child(even) {
+  animation-direction: reverse;
+}
+
+.preloader__sector {
+  font-weight: 600;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  text-transform: uppercase;
+  transform: translateZ(7rem);
+}
+
+.preloader__sector,
+.preloader__sector:empty:before {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.preloader__sector:empty:before {
+  background: linear-gradient(transparent 45%, currentColor 45% 55%, transparent 55%);
+  content: "";
+}
+
+.preloader__sector:nth-child(2) {
+  transform: rotateY(12deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(3) {
+  transform: rotateY(24deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(4) {
+  transform: rotateY(36deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(5) {
+  transform: rotateY(48deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(6) {
+  transform: rotateY(60deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(7) {
+  transform: rotateY(72deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(8) {
+  transform: rotateY(84deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(9) {
+  transform: rotateY(96deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(10) {
+  transform: rotateY(108deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(11) {
+  transform: rotateY(120deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(12) {
+  transform: rotateY(132deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(13) {
+  transform: rotateY(144deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(14) {
+  transform: rotateY(156deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(15) {
+  transform: rotateY(168deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(16) {
+  transform: rotateY(180deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(17) {
+  transform: rotateY(192deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(18) {
+  transform: rotateY(204deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(19) {
+  transform: rotateY(216deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(20) {
+  transform: rotateY(228deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(21) {
+  transform: rotateY(240deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(22) {
+  transform: rotateY(252deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(23) {
+  transform: rotateY(264deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(24) {
+  transform: rotateY(276deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(25) {
+  transform: rotateY(288deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(26) {
+  transform: rotateY(300deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(27) {
+  transform: rotateY(312deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(28) {
+  transform: rotateY(324deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(29) {
+  transform: rotateY(336deg) translateZ(7rem);
+}
+
+.preloader__sector:nth-child(30) {
+  transform: rotateY(348deg) translateZ(7rem);
+}
+
+/* Animations */
+@keyframes tiltSpin {
+  from {
+    transform: rotateY(0) rotateX(30deg);
+  }
+
+  to {
+    transform: rotateY(1turn) rotateX(30deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotateY(0);
+  }
+
+  to {
+    transform: rotateY(1turn);
+  }
+}
+
+/* ==================================================   */
+
+
+
