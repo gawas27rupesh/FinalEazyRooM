@@ -23,6 +23,17 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script
+	src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+	
 <title>tenantcreateadds</title>
 <style>
 body {
@@ -54,11 +65,11 @@ h1 {
 					<td><input type="hidden" id="utype" value="owner" name="utype"></td>
 				</tr>
 				<tr>
-					<td><input type="hidden" id="contno" name="contno" value="" required>
+					<td><input type="hidden" id="contno" name="contno" value="${contno}" required>
 					</td>
 				</tr>
 				<tr>
-					<td><input type="hidden" id="pswd" name="pswd" value="" required>
+					<td><input type="hidden" id="pswd" name="pswd" value="${pswd}" required>
 					</td>
 				</tr>
 				<tr>
@@ -105,8 +116,45 @@ h1 {
 			</div>
 		</form>
 	</div>
-	<script type="text/javascript">
+	<script>
+	$(document).ready(
+			function() {debugger;
+				$.ajax({
+					url : "allState",
+					method : "GET",
+					dataType : "json",
+					success : function(data) {debugger;
+					console.log(data);
+						var dropdown = $("#state");
+						$.each(data, function(index) {
+							$("#state").append("<option value="+ data[index].sid+ ">"+ data[index].sname +"</option>");
+						})
+					},
+					error : function(error) {
+						console.error("Error fetching state data: "+ error);
+					}
+				});
+			});
 	
+					$('#state').on('change', function () {debugger;
+					$('#city').empty();
+					let sid=$('#state').val();
+				    $.ajax({
+					url : "AllCityOfState/"+sid,
+					method : "GET",
+					dataType : "json",
+					success : function(data) {debugger;
+					console.log(data);
+						var dropdown = $("#city");
+						$.each(data.city, function(index) {
+							$("#city").append("<option value="+ data.city[index].cname+ ">"+ data.city[index].cname +"</option>");
+						});
+					},
+					error : function(error) {
+						console.error("Error fetching state data: "+ error);
+					}
+				}); 
+			}); 
 	</script>
 </body>
 </html>

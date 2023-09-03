@@ -77,11 +77,11 @@ h1 {
 						name="utype"></td>
 				</tr>
 				<tr>
-					<td><input type="hidden" id="contno" name="contno" value=""
-						required></td>
+					<td><input type="hidden" id="contno" name="contno"
+						value="${contno}" required></td>
 				</tr>
 				<tr>
-					<td><input type="hidden" id="pswd" name="pswd" value=""
+					<td><input type="hidden" id="pswd" name="pswd" value="${pswd}"
 						required></td>
 				</tr>
 				<tr>
@@ -104,7 +104,7 @@ h1 {
 				<tr>
 					<td><label for="city">ENTER CITY:</label></td>
 					<td><select name="city" id="city" class="input"
-						style="width: 100%; cursor: pointer;">
+						onclick="getCity()" style="width: 100%; cursor: pointer;">
 							<option value="1" disabled selected>Select</option>
 					</select></td>
 				</tr>
@@ -129,26 +129,44 @@ h1 {
 		</form>
 	</div>
 	<script>
-		$(document).ready(
-				function() {debugger;
-					$.ajax({
-						url : "Statename",
-						method : "GET",
-						dataType : "json",
-						success : function(data) {debugger;
-						console.log(data);
-							var dropdown = $("#state");
-							$.each(data, function(index) {
-								//dropdown.append($("<option>").val(sname).text(sname));
-								$("#state").append("<option value="+ data[index].sname+ ">"+ data[index].sname +"</option>");
-								
-							});
-						},
-						error : function(error) {
-							console.error("Error fetching state data: "+ error);
-						}
-					});
+	$(document).ready(
+			function() {debugger;
+				$.ajax({
+					url : "allState",
+					method : "GET",
+					dataType : "json",
+					success : function(data) {debugger;
+					console.log(data);
+						var dropdown = $("#state");
+						$.each(data, function(index) {
+							$("#state").append("<option value="+ data[index].sid+ ">"+ data[index].sname +"</option>");
+						})
+					},
+					error : function(error) {
+						console.error("Error fetching state data: "+ error);
+					}
 				});
+			});
+	
+					$('#state').on('change', function () {debugger;
+					$('#city').empty();
+					let sid=$('#state').val();
+				    $.ajax({
+					url : "AllCityOfState/"+sid,
+					method : "GET",
+					dataType : "json",
+					success : function(data) {debugger;
+					console.log(data);
+						var dropdown = $("#city");
+						$.each(data.city, function(index) {
+							$("#city").append("<option value="+ data.city[index].cname+ ">"+ data.city[index].cname +"</option>");
+						});
+					},
+					error : function(error) {
+						console.error("Error fetching state data: "+ error);
+					}
+				}); 
+			}); 
 	</script>
 </body>
 </html>

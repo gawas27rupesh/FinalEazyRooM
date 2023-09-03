@@ -55,13 +55,15 @@ public class EazyRooMowner {
 	}
 	
 	@RequestMapping(URLConstants.OWNERADD)
-	public String  owneradd(HttpSession session) 
+	public String  owneradd(HttpSession session,Model model) 
 	{
 		UserLoginDto userData = (UserLoginDto) session.getAttribute("userData");
 		System.out.println("tenant "+userData);
 		if (Objects.isNull(userData)) {	
 			return TemplatePage.LOGIN;
 		}
+		model.addAttribute("contno",userData.getMobile());
+		model.addAttribute("pswd",userData.getPswd());
 		return TemplatePage.OWNADD;
 	}
 	

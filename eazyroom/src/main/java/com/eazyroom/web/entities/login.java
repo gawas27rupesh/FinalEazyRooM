@@ -35,7 +35,7 @@ public class login {
 	private String pswd;
 	
 	@NotNull
-	private int cpswd;
+	private String cpswd;
 
 	@NotEmpty
 	private String utype;

@@ -44,13 +44,15 @@ public class EazyRooMtanant {
 	}
 	
 	@RequestMapping("/tenantadd")
-	public String  tenantadd(HttpSession session) 
+	public String  tenantadd(HttpSession session,Model model) 
 	{
 		UserLoginDto userData = (UserLoginDto) session.getAttribute("userData");
 		System.out.println("tenant "+userData);
 		if (Objects.isNull(userData)) {	
 			return TemplatePage.LOGIN;
 		}
+		model.addAttribute("contno", userData.getMobile());
+		model.addAttribute("pswd", userData.getPswd());
 		return "tenantadd";
 	}
 		

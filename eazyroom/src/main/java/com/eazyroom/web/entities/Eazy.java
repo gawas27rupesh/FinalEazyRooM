@@ -50,7 +50,7 @@ public class Eazy
 	private String city;
 	
 	@NotNull
-	private int pswd;
+	private String pswd;
 	
 	@NotEmpty
 	private String gender;
