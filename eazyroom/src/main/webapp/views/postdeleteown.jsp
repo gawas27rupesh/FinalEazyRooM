@@ -73,7 +73,7 @@
   </tbody>
 </table>
 	<div class="container text-center">
-		<a href="ownerdelete" class="btn btn-outline-success">GO BACK</a>
+		<a href="owner" class="btn btn-outline-success">GO BACK</a>
 	</div>	
 	</div>
 	</div>		

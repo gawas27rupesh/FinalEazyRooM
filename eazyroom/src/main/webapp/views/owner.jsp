@@ -63,10 +63,10 @@ td {
 					</a> <a href="seealltenant"
 						class="btn btn-outline-primary center mt-4 ml-3">SEE ALL
 							TENANT ADDs</a></td>
-					<td><a href="ownerdelete"> <img
+					<td><a href="postdeleteown"> <img
 							src="<c:url value="/resources/delete.jpg"/>" height="230px"
 							width="230px">
-					</a> <a href="ownerdelete"
+					</a> <a href="postdeleteown"
 						class="btn btn-outline-primary center mt-4 ml-5">SEE YOUR ADDs</a>
 					</td>
 				</tr>

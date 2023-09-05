@@ -16,7 +16,7 @@ public interface EazyRooMRepo extends JpaRepository<Eazy, Integer> {
 	
 
 	@Query(nativeQuery = true, value =  "SELECT * FROM eazy WHERE contno=:contno AND pswd=:pswd AND utype=:utype")                         
-	List<Eazy> getYourPost(long contno, int pswd, String utype);
+	List<Eazy> getYourPost(String contno, String pswd, String utype);
 
 	@Query(nativeQuery = true, value =  "SELECT * FROM eazy WHERE mobile=:mobile AND pswd=:pswd")                         
 	Eazy getAccountByMobileAndPassword(String mobile, String pswd);

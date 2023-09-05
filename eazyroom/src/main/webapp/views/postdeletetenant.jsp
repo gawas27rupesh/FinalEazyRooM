@@ -74,7 +74,7 @@
   </tbody>
 </table>
 	<div class="container text-center">
-		<a href="tenantdelete" class="btn btn-outline-success">GO BACK</a>
+		<a href="tenant" class="btn btn-outline-success">GO BACK</a>
 	</div>	
 	</div>
 	</div>		
