@@ -19,7 +19,7 @@ public interface EazyRooMService {
 
 	Eazy getEazy(int eazyId);
 
-	List<Eazy> seeyourpost(long contno, int pswd, String utype);
+	List<Eazy> seeyourpost(String string, String string2, String utype);
 
 	Eazy showpro(long cd);
 

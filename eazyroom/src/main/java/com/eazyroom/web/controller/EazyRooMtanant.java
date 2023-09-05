@@ -23,141 +23,124 @@ import com.eazyroom.web.service.EazyRooMService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-
-
 @Controller
 public class EazyRooMtanant {
-	
+
 	@Autowired
 	private EazyRooMService eazyRooMService;
-	
+
 	@RequestMapping(URLConstants.TENANT)
-	public String  tenant(HttpSession session,Model model) 
-	{
+	public String tenant(HttpSession session, Model model) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute("userData");
-		System.out.println("tenant "+userData);
-		if (Objects.isNull(userData)) {	
+		System.out.println("tenant " + userData);
+		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN;
 		}
 		model.addAttribute("utype", userData.getUtype());
 		return TemplatePage.TEN;
 	}
-	
+
 	@RequestMapping("/tenantadd")
-	public String  tenantadd(HttpSession session,Model model) 
-	{
+	public String tenantadd(HttpSession session, Model model) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute("userData");
-		System.out.println("tenant "+userData);
-		if (Objects.isNull(userData)) {	
+		System.out.println("tenant " + userData);
+		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN;
 		}
 		model.addAttribute("contno", userData.getMobile());
 		model.addAttribute("pswd", userData.getPswd());
 		return "tenantadd";
 	}
-		
-	@RequestMapping("/tenantdelete")
-	public String  tenantdelete(HttpSession session) 
-	{
-		UserLoginDto userData = (UserLoginDto) session.getAttribute("userData");
-		System.out.println("tenant "+userData);
-		if (Objects.isNull(userData)) {	
-			return TemplatePage.LOGIN;
-		}
-		return "tenantdelete";
-	}	
-	
+
 	@RequestMapping("/seealltenant")
-	public String  seealltenant(HttpSession session) 
-	{
+	public String seealltenant(HttpSession session) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute("userData");
-		System.out.println("tenant "+userData);
-		if (Objects.isNull(userData)) {	
+		System.out.println("tenant " + userData);
+		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN;
 		}
 		return "seealltenant";
 	}
-	
+
 	@PostMapping("/donetenant")
-	public String donetenant(@ModelAttribute Eazy eazy,HttpSession session) {
+	public String donetenant(@ModelAttribute Eazy eazy, HttpSession session) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute("userData");
-		System.out.println("tenant "+userData);
-		if (Objects.isNull(userData)) {	
+		System.out.println("tenant " + userData);
+		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN;
 		}
 		this.eazyRooMService.CreateAcnt(eazy);
-		return "donetenant";	
+		return "donetenant";
 	}
-	
-	
+
 	@GetMapping("/seetenant")
-	public String  seetenant(@RequestParam("city") String city,@RequestParam("utype") String utype,Model m,HttpSession session) 
-	{
+	public String seetenant(@RequestParam("city") String city, @RequestParam("utype") String utype, Model m,
+			HttpSession session) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute("userData");
-		System.out.println("tenant "+userData);
-		if (Objects.isNull(userData)) {	
+		System.out.println("tenant " + userData);
+		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN;
 		}
-		List<Eazy> eazy =eazyRooMService.getUserByCity(city,utype);
-		m.addAttribute("eazy",eazy);
-		m.addAttribute("city",city);
+		List<Eazy> eazy = eazyRooMService.getUserByCity(city, utype);
+		m.addAttribute("eazy", eazy);
+		m.addAttribute("city", city);
 		return "seetenant";
 	}
-	
-	
+
 	@GetMapping("/all")
-	public List<Eazy> all(){
+	public List<Eazy> all() {
 		List<Eazy> all = eazyRooMService.getAll();
 		return all;
 	}
-	
+
 	@GetMapping("/postdeletetenant")
-	public String postdeletetenant(@RequestParam("contno") long contno, @RequestParam("pswd") int pswd,
-			@RequestParam("utype") String utype, Model m,HttpSession session)	{
+	public String postdeletetenant(Model m, HttpSession session) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute("userData");
-		System.out.println("tenant "+userData);
-		if (Objects.isNull(userData)) {	
+		System.out.println("tenant " + userData);
+		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN;
 		}
-		List<Eazy> eazy =eazyRooMService.seeyourpost(contno,pswd,utype);
-		if(eazy.isEmpty())
-		{
-			m.addAttribute("msg","Invalid Contact Number and Password...!");
+		List<Eazy> eazy = null;
+		if (userData.getUtype().equals("admin")) {
+			eazy = eazyRooMService.getAll();
+		} else {
+			eazy = eazyRooMService.seeyourpost(userData.getMobile(), userData.getPswd(), userData.getUtype());
+		}
+		if (eazy.isEmpty()) {
+			m.addAttribute("msg", "Invalid Contact Number and Password...!");
 			return "tenantdelete";
 		}
-		m.addAttribute("eazy",eazy);
+		m.addAttribute("eazy", eazy);
 		return "postdeletetenant";
 	}
-	
+
 	@RequestMapping("/deletetenant/{eazyId}")
-	public RedirectView deletetenant(@PathVariable("eazyId") int eazyId,HttpServletRequest request,HttpSession session) 
-	{
+	public RedirectView deletetenant(@PathVariable("eazyId") int eazyId, HttpServletRequest request,
+			HttpSession session) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute("userData");
-		System.out.println("tenant "+userData);
-		if (Objects.isNull(userData)) {	
-			RedirectView redirectView=new RedirectView();
-			System.out.println("================>>>"+userData);
+		System.out.println("tenant " + userData);
+		if (Objects.isNull(userData)) {
+			RedirectView redirectView = new RedirectView();
 			redirectView.setUrl("/");
 			return redirectView;
 		}
 		System.out.println(eazyId);
 		this.eazyRooMService.deleteEazy(eazyId);
-		RedirectView redirectView=new RedirectView();
+		RedirectView redirectView = new RedirectView();
 		redirectView.setUrl(request.getContextPath() + "/tenantdelete");
-		return redirectView;	
+		return redirectView;
 	}
-	
+
 	@RequestMapping("/updatetenant/{eid}")
-	public String updateForm2(@PathVariable("eid") int eid,Model m,HttpSession session) 
-	{
+	public String updateForm2(@PathVariable("eid") int eid, Model m, HttpSession session) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute("userData");
-		System.out.println("tenant "+userData);
-		if (Objects.isNull(userData)) {	
+		System.out.println("tenant " + userData);
+		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN;
 		}
 		System.out.println(eid);
 		Eazy eazy = this.eazyRooMService.getEazy(eid);
 		m.addAttribute(eazy);
-		return "updateown";		
-	}	
+		return "updateown";
+	}
 }
