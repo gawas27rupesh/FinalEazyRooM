@@ -6,7 +6,7 @@ import com.eazyroom.web.entities.Eazy;
 
 
 
-public interface EazyRooMService {
+public interface EazyRoomService {
 	List<Eazy> getUserByCity(String city);
 
 	List<Eazy> getUserByCitygender(String city, String utype, String gender);

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eazyroom.web.entities.login;
-import com.eazyroom.web.repository.loginRepository;
+import com.eazyroom.web.repository.LoginRepo;
 import com.eazyroom.web.service.LoginService;
 
 
@@ -14,7 +14,7 @@ import com.eazyroom.web.service.LoginService;
 public class LoginImpl implements LoginService {
 
 	@Autowired
-	private loginRepository loginRepository;
+	private LoginRepo loginRepository;
 	
 	@Override
 	public void registerAct(login login) {

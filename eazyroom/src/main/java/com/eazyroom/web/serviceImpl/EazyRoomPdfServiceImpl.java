@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.eazyroom.web.entities.Eazy;
 import com.eazyroom.web.repository.PdfRepo;
-import com.eazyroom.web.service.EazyRooMpdfService;
+import com.eazyroom.web.service.EazyRoomPdfService;
 
 @Service
-public class EazyRooMpdfserviceImpl implements EazyRooMpdfService {
+public class EazyRoomPdfServiceImpl implements EazyRoomPdfService {
 
 	@Autowired
 	private PdfRepo pdfRepo;

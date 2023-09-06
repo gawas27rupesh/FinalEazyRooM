@@ -13,7 +13,7 @@ import com.eazyroom.web.dto.UserLoginDto;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class EazyRooM {
+public class EazyRoom {
 	
 	@RequestMapping(URLConstants.HOME)
 	public String home(HttpSession session,Model model) {

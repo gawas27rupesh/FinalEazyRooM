@@ -6,6 +6,6 @@ import com.eazyroom.web.entities.login;
 
 
 
-public interface loginRepository extends JpaRepository<login, Integer> {
+public interface LoginRepo extends JpaRepository<login, Integer> {
 
 }

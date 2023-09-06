@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.eazyroom.web.entities.Eazy;
 import com.eazyroom.web.repository.EazyRooMRepo;
-import com.eazyroom.web.service.EazyRooMService;
+import com.eazyroom.web.service.EazyRoomService;
 
 
 @Service
-public class EazyRooMServiceImpl implements EazyRooMService{
+public class EazyRooServiceImpl implements EazyRoomService{
 	
 	@Autowired
 	private EazyRooMRepo eazyRooMRepo;
@@ -22,17 +22,7 @@ public class EazyRooMServiceImpl implements EazyRooMService{
 		return listOfOwner;
 	}
 
-	@Override
-	public List<Eazy> getUserByCitygender(String city, String utype, String gender) {
-		//List<Eazy> userByCtyGen = eazyRooMRepo.getUserByCtyGen(city,utype,gender);
-		return null;
-	}
-
-	@Override
-	public List<Eazy> getUsercount(long contno) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public  void CreateAcnt(Eazy eazy) {
@@ -56,17 +46,7 @@ public class EazyRooMServiceImpl implements EazyRooMService{
 		return getpost;
 	}
 
-	@Override
-	public Eazy showpro(long cd) {
 	
-		return null;
-	}
-
-	@Override
-	public List<Eazy> showAllUser() {
-    //	List<Eazy> findAll = eazyRooMRepo.findAll();
-		return null;
-	}
 
 	@Override
 	public List<Eazy> getAll() {
@@ -74,16 +54,51 @@ public class EazyRooMServiceImpl implements EazyRooMService{
 		return findAll;
 	}
 
+
+	@Override
+	public Eazy getAccountByMobileAndPassword(String mobile, String pswd) {
+		Eazy accountByMobileAndPassword = this.eazyRooMRepo.getAccountByMobileAndPassword(mobile,pswd);
+		return accountByMobileAndPassword;
+	}
+
+
+
 	@Override
 	public List<Eazy> getUserByCity(String city) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+
+
 	@Override
-	public Eazy getAccountByMobileAndPassword(String mobile, String pswd) {
-		Eazy accountByMobileAndPassword = this.eazyRooMRepo.getAccountByMobileAndPassword(mobile,pswd);
-		return accountByMobileAndPassword;
+	public List<Eazy> getUserByCitygender(String city, String utype, String gender) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public List<Eazy> getUsercount(long contno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public Eazy showpro(long cd) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public List<Eazy> showAllUser() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

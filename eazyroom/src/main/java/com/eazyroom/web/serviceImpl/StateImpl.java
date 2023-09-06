@@ -7,7 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.eazyroom.web.dto.Statedto;
+import com.eazyroom.web.dto.StateDto;
 import com.eazyroom.web.entities.State;
 import com.eazyroom.web.repository.StateRepo;
 import com.eazyroom.web.service.StateService;
@@ -24,11 +24,11 @@ public class StateImpl implements StateService{
 	
 
 	@Override
-	public List<Statedto> getAllStateName() {
-		List<Statedto> statedto=new ArrayList<Statedto>();
+	public List<StateDto> getAllStateName() {
+		List<StateDto> statedto=new ArrayList<StateDto>();
 		List<State> findAll = this.stateRepo.findAll();
 		for(State state:findAll) {
-			Statedto stateDto = modelMapper.map(state, Statedto.class);
+			StateDto stateDto = modelMapper.map(state, StateDto.class);
 			statedto.add(stateDto);
 		}
 		return statedto;

@@ -16,16 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.eazyroom.web.dto.UserLoginDto;
 import com.eazyroom.web.entities.Eazy;
-import com.eazyroom.web.service.EazyRooMpdfService;
+import com.eazyroom.web.service.EazyRoomPdfService;
 import com.eazyroom.web.utility.GeneratePdfUtil;
 
 import jakarta.servlet.http.HttpSession;
 
 @RestController
-public class EazyRooMpdf {
+public class EazyRoomPdf {
 	
 	@Autowired
-	private EazyRooMpdfService eazyRooMpdfService;
+	private EazyRoomPdfService eazyRooMpdfService;
 	
 
 	@GetMapping(value = "pdfowner/{city}", produces = MediaType.APPLICATION_PDF_VALUE)

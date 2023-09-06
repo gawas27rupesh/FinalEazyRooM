@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.eazyroom.web.entities.Eazy;
 
-public interface EazyRooMpdfService {
+public interface EazyRoomPdfService {
 	
 	List<Eazy> getUserByCity(String city, String utype);	
 	

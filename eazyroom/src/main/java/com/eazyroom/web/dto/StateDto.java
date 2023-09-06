@@ -8,7 +8,7 @@ import lombok.Setter;
 @Component
 @Getter
 @Setter
-public class Statedto {
+public class StateDto {
 	private Integer sid;
 	private String sname;
 }
