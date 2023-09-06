@@ -19,17 +19,10 @@ public class UserLoginDto implements Serializable  {
 	public static final List<String> ROLENAMEVALICATION = Arrays.asList("EazyRooM Admin","Owner","Tenant");
 
 	public static final String OWNER = "Owner";
-	public static final String TENANT = "Tenant";
+	public static final String TENANT = "Tenant";	
 	
-	
-	private String mobile;
-	
-	private String pswd;
-	
+	private String mobile;	
+	private String pswd;	
 	private String utype;
 
-	@Override
-	public String toString() {
-		return "UserLoginDto [mobile=" + mobile + ", pswd=" + pswd + ", utype=" + utype + "]";
-	}
 }

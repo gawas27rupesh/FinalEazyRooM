@@ -30,4 +30,5 @@ public interface EazyRooMService {
 	List<Eazy> getUserByCity(String city, String utype);
 
 	Eazy getAccountByMobileAndPassword(String mobile, String pswd);
+
 }

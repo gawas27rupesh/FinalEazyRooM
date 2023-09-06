@@ -2,7 +2,6 @@ package com.eazyroom.web.serviceImpl;
 
 import java.util.List;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +20,6 @@ public class CityImpl implements CityService {
 	@Autowired
 	private StateRepo stateRepo;
 	
-	@Autowired
-	private ModelMapper modelMapper;
-
 
 	@Override
 	public List<City> getAllCity() {
@@ -31,16 +27,9 @@ public class CityImpl implements CityService {
 		return findAll;
 	}
 
-	//List<Item> items = factory.getIemRepository().findAllById(itemsList);
 	@Override
 	public State getAllCity(Integer sid) {
-		//List<CityDto> cityDtos=new ArrayList<CityDto>();
 		State allCity=this.stateRepo.getById(sid);
-		System.out.println(allCity);
-//		for(City city:allCity) {
-//			CityDto stateDto = modelMapper.map(city, CityDto.class);
-//			cityDtos.add(stateDto);
-//		}
 		return allCity;
 	}
 

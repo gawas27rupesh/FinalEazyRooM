@@ -17,7 +17,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.eazyroom.web.constants.TemplatePage;
 import com.eazyroom.web.constants.URLConstants;
-import com.eazyroom.web.dto.CityDto;
 import com.eazyroom.web.dto.Statedto;
 import com.eazyroom.web.dto.UserLoginDto;
 import com.eazyroom.web.entities.City;

@@ -10,13 +10,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eazyroom.web.constants.TemplatePage;
 import com.eazyroom.web.constants.URLConstants;
 import com.eazyroom.web.dto.UserLoginDto;
 import com.eazyroom.web.entities.login;
-import com.eazyroom.web.service.EazyRooMService;
 import com.eazyroom.web.service.LoginService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,9 +23,6 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
-	
-	@Autowired
-	private EazyRooMService eazyRooMService;
 	
 	@Autowired
 	private LoginService loginService;

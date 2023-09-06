@@ -26,10 +26,4 @@ public class State {
 	@OneToMany(mappedBy = "state", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private List<City> city=new ArrayList<>();
 
-	@Override
-	public String toString() {
-		return "State [sid=" + sid + ", sname=" + sname + ", city=" + city + "]";
-	}
-	
-	
 }

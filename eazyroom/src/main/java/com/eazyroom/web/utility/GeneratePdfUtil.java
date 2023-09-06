@@ -18,31 +18,30 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-public class GeneratePdfReport {
 
-	public static ByteArrayInputStream ownerReport(List<Eazy> eazy,String utype) {
+public class GeneratePdfUtil {
 
-		String title="EazyRooM";
-		String subtitle="("+utype+")";
-		
+	public static ByteArrayInputStream ownerReport(List<Eazy> eazy, String utype) {
+
+		String title = "EazyRooM";
+		String subtitle = "(" + utype + ")";
+
 		Document document = new Document();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-		Font titleFont=FontFactory.getFont(FontFactory.HELVETICA_BOLD,20);
-		Paragraph titleparagraph=new Paragraph(title,titleFont);
-		titleparagraph.setAlignment(Element.ALIGN_CENTER);	
-		
-		
-		Paragraph paragraph=new Paragraph();
+		Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 20);
+		Paragraph titleparagraph = new Paragraph(title, titleFont);
+		titleparagraph.setAlignment(Element.ALIGN_CENTER);
+
+		Paragraph paragraph = new Paragraph();
 		paragraph.add(new Chunk(subtitle));
 		paragraph.setAlignment(Element.ALIGN_CENTER);
-		
-		
+
 		try {
 
 			PdfPTable table = new PdfPTable(6);
 			table.setWidthPercentage(90);
-			table.setWidths(new int[] {5,8,5,5,5,8});
+			table.setWidths(new int[] { 5, 8, 5, 5, 5, 8 });
 
 			Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
 
@@ -58,15 +57,15 @@ public class GeneratePdfReport {
 			hcell = new PdfPCell(new Phrase("Rent", headFont));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(hcell);
-			
+
 			hcell = new PdfPCell(new Phrase("Room in", headFont));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(hcell);
-			
+
 			hcell = new PdfPCell(new Phrase("Room for", headFont));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(hcell);
-			
+
 			hcell = new PdfPCell(new Phrase("Address", headFont));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(hcell);
@@ -86,25 +85,25 @@ public class GeneratePdfReport {
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell);
-				
+
 				cell = new PdfPCell(new Phrase(eazy2.getRent()));
 				cell.setPaddingLeft(10);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell);
-				
+
 				cell = new PdfPCell(new Phrase(eazy2.getCity()));
 				cell.setPaddingLeft(5);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell);
-				
+
 				cell = new PdfPCell(new Phrase(eazy2.getGender()));
 				cell.setPaddingLeft(5);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell);
-				
+
 				cell = new PdfPCell(new Phrase(eazy2.getAddress()));
 				cell.setPaddingLeft(5);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -114,7 +113,7 @@ public class GeneratePdfReport {
 
 			PdfWriter.getInstance(document, out);
 			document.open();
-			
+
 			document.add(titleparagraph);
 			document.add(paragraph);
 			document.add(new Paragraph("\n"));
@@ -123,36 +122,34 @@ public class GeneratePdfReport {
 			document.close();
 
 		} catch (DocumentException ex) {
-
-			Logger.getLogger(GeneratePdfReport.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(GeneratePdfUtil.class.getName()).log(Level.SEVERE, null, ex);
 		}
-
 		return new ByteArrayInputStream(out.toByteArray());
 	}
-	
-	public static ByteArrayInputStream tenantReport(List<Eazy> eazy,String utype) {
 
-		String title="EazyRooM";
-		String subtitle="("+utype+")";
-		
+	
+	
+	public static ByteArrayInputStream tenantReport(List<Eazy> eazy, String utype) {
+
+		String title = "EazyRooM";
+		String subtitle = "(" + utype + ")";
+
 		Document document = new Document();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-		Font titleFont=FontFactory.getFont(FontFactory.HELVETICA_BOLD,20);
-		Paragraph titleparagraph=new Paragraph(title,titleFont);
-		titleparagraph.setAlignment(Element.ALIGN_CENTER);	
-		
-		
-		Paragraph paragraph=new Paragraph();
+		Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 20);
+		Paragraph titleparagraph = new Paragraph(title, titleFont);
+		titleparagraph.setAlignment(Element.ALIGN_CENTER);
+
+		Paragraph paragraph = new Paragraph();
 		paragraph.add(new Chunk(subtitle));
 		paragraph.setAlignment(Element.ALIGN_CENTER);
-		
-		
+
 		try {
 
 			PdfPTable table = new PdfPTable(6);
 			table.setWidthPercentage(90);
-			table.setWidths(new int[] {5,8,5,5,5,8});
+			table.setWidths(new int[] { 5, 8, 5, 5, 5, 8 });
 
 			Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
 
@@ -168,15 +165,15 @@ public class GeneratePdfReport {
 			hcell = new PdfPCell(new Phrase("Budget", headFont));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(hcell);
-			
+
 			hcell = new PdfPCell(new Phrase("Preferred City", headFont));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(hcell);
-			
+
 			hcell = new PdfPCell(new Phrase("Gender", headFont));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(hcell);
-			
+
 			hcell = new PdfPCell(new Phrase("Address", headFont));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(hcell);
@@ -196,25 +193,25 @@ public class GeneratePdfReport {
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell);
-				
+
 				cell = new PdfPCell(new Phrase(eazy2.getRent()));
 				cell.setPaddingLeft(10);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell);
-				
+
 				cell = new PdfPCell(new Phrase(eazy2.getCity()));
 				cell.setPaddingLeft(5);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell);
-				
+
 				cell = new PdfPCell(new Phrase(eazy2.getGender()));
 				cell.setPaddingLeft(5);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell);
-				
+
 				cell = new PdfPCell(new Phrase(eazy2.getAddress()));
 				cell.setPaddingLeft(5);
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -224,7 +221,7 @@ public class GeneratePdfReport {
 
 			PdfWriter.getInstance(document, out);
 			document.open();
-			
+
 			document.add(titleparagraph);
 			document.add(paragraph);
 			document.add(new Paragraph("\n"));
@@ -233,10 +230,8 @@ public class GeneratePdfReport {
 			document.close();
 
 		} catch (DocumentException ex) {
-
-			Logger.getLogger(GeneratePdfReport.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(GeneratePdfUtil.class.getName()).log(Level.SEVERE, null, ex);
 		}
-
 		return new ByteArrayInputStream(out.toByteArray());
 	}
 }

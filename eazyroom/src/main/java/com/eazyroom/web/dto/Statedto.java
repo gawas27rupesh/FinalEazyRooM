@@ -11,10 +11,4 @@ import lombok.Setter;
 public class Statedto {
 	private Integer sid;
 	private String sname;
-	@Override
-	public String toString() {
-		return "Statedto [sid=" + sid + ", sname=" + sname + "]";
-	}
-	
-	
 }

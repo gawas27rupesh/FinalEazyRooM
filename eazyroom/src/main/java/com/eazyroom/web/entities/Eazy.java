@@ -62,12 +62,4 @@ public class Eazy
     @Temporal(TemporalType.TIMESTAMP)
 	private Date date;
 	
-	@Override
-	public String toString() {
-		return "Eazy [id=" + id + ", utype=" + utype + ", name=" + name + ", contno=" + contno + ", rent=" + rent
-				+ ", city=" + city + ", pswd=" + pswd + ", gender=" + gender + ", address=" + address + "]";
-	}
-	
-	
-	
 }

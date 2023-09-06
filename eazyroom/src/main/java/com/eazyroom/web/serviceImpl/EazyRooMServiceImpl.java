@@ -85,5 +85,6 @@ public class EazyRooMServiceImpl implements EazyRooMService{
 		Eazy accountByMobileAndPassword = this.eazyRooMRepo.getAccountByMobileAndPassword(mobile,pswd);
 		return accountByMobileAndPassword;
 	}
+
 	
 }

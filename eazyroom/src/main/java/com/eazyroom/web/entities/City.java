@@ -27,12 +27,4 @@ public class City {
 	@JoinColumn(name = "sid")
 	private State state;
 
-	@Override
-	public String toString() {
-		return "City [cid=" + cid + ", cname=" + cname + ", state=" + state + "]";
-	}
-
-	
-	
-	
  }

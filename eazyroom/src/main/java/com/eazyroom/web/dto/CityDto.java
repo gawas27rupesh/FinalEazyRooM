@@ -11,10 +11,4 @@ import lombok.Setter;
 public class CityDto {
 	private Integer cid;
 	private String cname;
-	@Override
-	public String toString() {
-		return "CityDto [cid=" + cid + ", cname=" + cname + "]";
-	}
-	
-	
 }

@@ -1,8 +1,11 @@
 package com.eazyroom.web.service;
 
-import java.io.ByteArrayInputStream;
+import java.util.List;
+
+import com.eazyroom.web.entities.Eazy;
 
 public interface EazyRooMpdfService {
 	
-	public ByteArrayInputStream createPdf();
+	List<Eazy> getUserByCity(String city, String utype);	
+	
 }
