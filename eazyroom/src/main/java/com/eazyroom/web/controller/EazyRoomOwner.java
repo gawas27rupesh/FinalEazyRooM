@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.eazyroom.web.constants.AttributeName;
 import com.eazyroom.web.constants.TemplatePage;
 import com.eazyroom.web.constants.URLConstants;
 import com.eazyroom.web.dto.StateDto;
@@ -33,8 +34,8 @@ import jakarta.servlet.http.HttpSession;
 public class EazyRoomOwner {
 
 	@Autowired
-	private EazyRoomService eazyRooMService;
-
+	private EazyRoomService eazyRoomService;
+	
 	@Autowired
 	private StateService stateService;
 
@@ -43,100 +44,95 @@ public class EazyRoomOwner {
 
 	@RequestMapping(URLConstants.OWNER)
 	public String owner(HttpSession session, Model model) {
-		UserLoginDto userData = (UserLoginDto) session.getAttribute("userData");
-		System.out.println("tenant " + userData);
+		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
-			return TemplatePage.LOGIN;
+			return TemplatePage.LOGIN_PAGE;
 		}
-		model.addAttribute("utype", userData.getUtype());
-		return TemplatePage.OWN;
+		model.addAttribute(AttributeName.UTYPE, userData.getUtype());
+		return TemplatePage.OWNER_PAGE;
 	}
 
 	@RequestMapping(URLConstants.OWNERADD)
 	public String owneradd(HttpSession session, Model model) {
-		UserLoginDto userData = (UserLoginDto) session.getAttribute("userData");
-		System.out.println("tenant " + userData);
+		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
-			return TemplatePage.LOGIN;
+			return TemplatePage.LOGIN_PAGE;
 		}
-		model.addAttribute("contno", userData.getMobile());
-		model.addAttribute("pswd", userData.getPswd());
-		return TemplatePage.OWNADD;
+		model.addAttribute(AttributeName.CONTNO, userData.getMobile());
+		model.addAttribute(AttributeName.PSWD, userData.getPswd());
+		return TemplatePage.OWNER_ADD_PAGE;
 	}
 
 	@RequestMapping(URLConstants.OWNERDELETE)
 	public String ownerdelete(HttpSession session) {
-		UserLoginDto userData = (UserLoginDto) session.getAttribute("userData");
-		System.out.println("tenant " + userData);
+		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
-			return TemplatePage.LOGIN;
+			return TemplatePage.LOGIN_PAGE;
 		}
-		return TemplatePage.OWNDELETE;
+		return TemplatePage.OWNER_DELETE_PAGE;
 	}
 
 	@RequestMapping(URLConstants.SEEALLOWNER)
 	public String seeallowner(HttpSession session) {
-		UserLoginDto userData = (UserLoginDto) session.getAttribute("userData");
-		System.out.println("tenant " + userData);
+		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
-			return TemplatePage.LOGIN;
+			return TemplatePage.LOGIN_PAGE;
 		}
-		return TemplatePage.SEEALLOWN;
+		return TemplatePage.SEE_ALL_OWNER_PAGE;
 	}
 
 	@PostMapping(URLConstants.DONEOWNER)
 	public String doneowner(@ModelAttribute Eazy eazy, HttpSession session) {
-		UserLoginDto userData = (UserLoginDto) session.getAttribute("userData");
-		System.out.println("tenant " + userData);
+		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
-			return TemplatePage.LOGIN;
+			return TemplatePage.LOGIN_PAGE;
 		}
-		this.eazyRooMService.CreateAcnt(eazy);
-		return TemplatePage.DONEOWN;
+		this.eazyRoomService.CreateAcnt(eazy);
+		return TemplatePage.DONE_OWNER_PAGE;
 	}
 
 	@GetMapping(URLConstants.SEEOWNER)
 	public String seeowner(@RequestParam("city") String city, @RequestParam("utype") String utype, Model m,
 			HttpSession session) {
-		UserLoginDto userData = (UserLoginDto) session.getAttribute("userData");
+		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
-			return TemplatePage.LOGIN;
+			return TemplatePage.LOGIN_PAGE;
 		}
-		List<Eazy> eazy = eazyRooMService.getUserByCity(city, utype);
-		m.addAttribute("eazy", eazy);
-		m.addAttribute("city", city);
-		return TemplatePage.SEEOWNERPAGE;
+		List<Eazy> eazy = eazyRoomService.getUserByCity(city, utype);
+		m.addAttribute(AttributeName.EAZY, eazy);
+		m.addAttribute(AttributeName.CITY, city);
+		return TemplatePage.SEE_OWNER_PAGE;
 	}
 
 	@GetMapping(URLConstants.POSTDELETEOWN)
 	public String postdeleteown(Model m, HttpSession session) {
-		UserLoginDto userData = (UserLoginDto) session.getAttribute("userData");
+		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
-			return TemplatePage.LOGIN;
+			return TemplatePage.LOGIN_PAGE;
 		}
 		List<Eazy> eazy = null;
-		if (userData.getUtype().equals("admin")) {
-			eazy = eazyRooMService.getAll();
+		if (userData.getUtype().equals(AttributeName.ADMIN)) {
+			eazy = eazyRoomService.getAll();
 		} else {
-			eazy = eazyRooMService.seeyourpost(userData.getMobile(), userData.getPswd(), userData.getUtype());
+			eazy = eazyRoomService.seeyourpost(userData.getMobile(), userData.getPswd(), userData.getUtype());
 		}
 		if (eazy.isEmpty()) {
-			m.addAttribute("msg", "Invalid Contact Number and Password...!");
+			m.addAttribute(AttributeName.MSG, "Invalid Contact Number and Password...!");
 			return URLConstants.OWNERDELETE;
 		}
-		m.addAttribute("eazy", eazy);
+		m.addAttribute(AttributeName.EAZY, eazy);
 		return URLConstants.POSTDELETEOWN;
 	}
 
 	@RequestMapping(URLConstants.DELETEOWNBYID)
 	public RedirectView deleteown(@PathVariable("eazyId") int eazyId, HttpServletRequest request, HttpSession session) {
-		UserLoginDto userData = (UserLoginDto) session.getAttribute("userData");
+		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
 			RedirectView redirectView = new RedirectView();
 			redirectView.setUrl(URLConstants.MAIN);
 			return redirectView;
 		}
-		this.eazyRooMService.deleteEazy(eazyId);
+		this.eazyRoomService.deleteEazy(eazyId);
 		RedirectView redirectView = new RedirectView();
 		redirectView.setUrl(request.getContextPath() + URLConstants.OWNERDELETE);
 		return redirectView;
@@ -144,16 +140,17 @@ public class EazyRoomOwner {
 
 	@RequestMapping(URLConstants.UPDATEOWNBYID)
 	public String updateForm1(@PathVariable("eid") int eid, Model m, HttpSession session) {
-		UserLoginDto userData = (UserLoginDto) session.getAttribute("userData");
+		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
-			return TemplatePage.LOGIN;
+			return TemplatePage.LOGIN_PAGE;
 		}
-		System.out.println(eid);
-		Eazy eazy = this.eazyRooMService.getEazy(eid);
+		Eazy eazy = this.eazyRoomService.getEazy(eid);
 		m.addAttribute(eazy);
-		return TemplatePage.UPDATETENANT;
+		return TemplatePage.UPDATE_TENANT;
 	}
 
+	
+	//For Ajax call
 	@GetMapping("/allState")
 	@ResponseBody
 	public List<State> getState() {

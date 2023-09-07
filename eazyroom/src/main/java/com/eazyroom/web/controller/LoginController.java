@@ -39,7 +39,7 @@ public class LoginController {
 			else if(userData.getUtype().equalsIgnoreCase("tenant"))
 				return URLConstants.TENANT;
 		}
-		return TemplatePage.LOGIN;
+		return TemplatePage.LOGIN_PAGE;
 	}
 	
 	
@@ -67,7 +67,7 @@ public class LoginController {
 	
 	@RequestMapping(URLConstants.REGISTER)
 	public String register() {
-		return TemplatePage.REGISTERPAGE;	
+		return TemplatePage.REGISTER_PAGE;	
 	}
 	
 	@RequestMapping(URLConstants.REGISTERSUCCESS)
@@ -82,7 +82,7 @@ public class LoginController {
 		session.setMaxInactiveInterval(60 * 60 * 1);
 		return URLConstants.REDIRECT + URLConstants.HOME;
 		}
-		return TemplatePage.REGISTERPAGE;
+		return TemplatePage.REGISTER_PAGE;
 	}
 	
 	@RequestMapping("/logout")
