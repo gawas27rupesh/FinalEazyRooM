@@ -12,20 +12,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.eazyroom.web.constants.AttributeName;
 import com.eazyroom.web.constants.TemplatePage;
 import com.eazyroom.web.constants.URLConstants;
-import com.eazyroom.web.dto.StateDto;
 import com.eazyroom.web.dto.UserLoginDto;
-import com.eazyroom.web.entities.City;
 import com.eazyroom.web.entities.Eazy;
-import com.eazyroom.web.entities.State;
-import com.eazyroom.web.service.CityService;
 import com.eazyroom.web.service.EazyRoomService;
-import com.eazyroom.web.service.StateService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -36,12 +30,7 @@ public class EazyRoomOwner {
 	@Autowired
 	private EazyRoomService eazyRoomService;
 	
-	@Autowired
-	private StateService stateService;
-
-	@Autowired
-	private CityService cityService;
-
+	
 	@RequestMapping(URLConstants.OWNER)
 	public String owner(HttpSession session, Model model) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
@@ -147,41 +136,5 @@ public class EazyRoomOwner {
 		Eazy eazy = this.eazyRoomService.getEazy(eid);
 		m.addAttribute(eazy);
 		return TemplatePage.UPDATE_TENANT;
-	}
-
-	
-	//For Ajax call
-	@GetMapping("/allState")
-	@ResponseBody
-	public List<State> getState() {
-		List<State> allState = this.stateService.getAllState();
-		return allState;
-	}
-
-	@GetMapping("/allCity")
-	@ResponseBody
-	public List<City> getCity() {
-		List<City> allCity = this.cityService.getAllCity();
-		return allCity;
-	}
-
-	@GetMapping("/Statename")
-	@ResponseBody
-	public List<StateDto> allStateName() {
-		List<StateDto> allStateName = this.stateService.getAllStateName();
-		return allStateName;
-	}
-
-	@GetMapping("/AllCityOfState/{sid}")
-	@ResponseBody
-	public State getAllCityBySid(@PathVariable("sid") Integer sid) {
-		List<State> allState = this.stateService.getAllState();
-		State s = null;
-		for (State state : allState) {
-			if (state.getSid() == sid) {
-				s = state;
-			}
-		}
-		return s;
 	}
 }

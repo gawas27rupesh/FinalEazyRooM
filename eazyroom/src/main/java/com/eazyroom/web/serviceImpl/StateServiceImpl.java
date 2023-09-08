@@ -13,7 +13,7 @@ import com.eazyroom.web.repository.StateRepo;
 import com.eazyroom.web.service.StateService;
 
 @Service
-public class StateImpl implements StateService{
+public class StateServiceImpl implements StateService{
 
 	@Autowired
 	private StateRepo stateRepo;
@@ -34,16 +34,10 @@ public class StateImpl implements StateService{
 		return statedto;
 	}
 
-
-
 	@Override
 	public List<State> getAllState() {
 		List<State> findAll = this.stateRepo.findAll();
 		return findAll;
-	}
-
-
-
-	
+	}	
 
 }

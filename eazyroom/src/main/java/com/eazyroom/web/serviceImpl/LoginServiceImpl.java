@@ -11,7 +11,7 @@ import com.eazyroom.web.service.LoginService;
 
 
 @Service
-public class LoginImpl implements LoginService {
+public class LoginServiceImpl implements LoginService {
 
 	@Autowired
 	private LoginRepo loginRepository;
