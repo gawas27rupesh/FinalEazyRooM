@@ -18,7 +18,7 @@ public class EazyRooServiceImpl implements EazyRoomService{
 
 	@Override
 	public List<Eazy> getUserByCity(String city,String utype) {
-		List<Eazy> listOfOwner=eazyRooMRepo.findByCityOrUtype(city, utype);
+		List<Eazy> listOfOwner=eazyRooMRepo.findByCityAndUtype(city, utype);
 		return listOfOwner;
 	}
 
@@ -42,8 +42,8 @@ public class EazyRooServiceImpl implements EazyRoomService{
 
 	@Override
 	public List<Eazy> seeyourpost(String contno, String pswd, String utype) {
-		List<Eazy> getpost=this.eazyRooMRepo.getYourPost(contno,pswd,utype);
-		return getpost;
+		//List<Eazy> getpost=this.eazyRooMRepo.getYourPost(contno,pswd,utype);
+		return null;
 	}
 
 	
@@ -102,13 +102,6 @@ public class EazyRooServiceImpl implements EazyRoomService{
 		return null;
 	}
 
-
-
-	@Override
-	public Eazy getAccountByMobileOrPassword1(String mobile, String pswd) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	
 }

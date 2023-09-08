@@ -17,7 +17,7 @@ public class EazyRoomPdfServiceImpl implements EazyRoomPdfService {
 	
 	@Override
 	public List<Eazy> getUserByCity(String city, String utype) {
-		List<Eazy> listOfOwner = pdfRepo.getUserbyCty(city, utype);
+		List<Eazy> listOfOwner = pdfRepo.getByCityAndUtype(city, utype);
 		return listOfOwner;
 	}
 
