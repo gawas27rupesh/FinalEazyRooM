@@ -42,8 +42,8 @@ public class EazyRooServiceImpl implements EazyRoomService{
 
 	@Override
 	public List<Eazy> seeyourpost(String contno, String pswd, String utype) {
-		//List<Eazy> getpost=this.eazyRooMRepo.getYourPost(contno,pswd,utype);
-		return null;
+		List<Eazy> list=this.eazyRooMRepo.findByContnoAndPswdAndUtype(contno,pswd,utype);
+		return list;
 	}
 
 	

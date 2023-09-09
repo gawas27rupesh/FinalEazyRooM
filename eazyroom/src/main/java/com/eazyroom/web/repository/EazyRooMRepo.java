@@ -11,5 +11,7 @@ import com.eazyroom.web.entities.Eazy;
 public interface EazyRooMRepo extends JpaRepository<Eazy, Integer> {
 
 	List<Eazy> findByCityAndUtype(String city, String utype);
+
+	List<Eazy> findByContnoAndPswdAndUtype(String contno, String pswd, String utype);
 	
 }

@@ -88,7 +88,7 @@ public class EazyRoomTenant {
 			return TemplatePage.LOGIN_PAGE;
 		}
 		this.eazyRooMService.CreateAcnt(eazy);
-		return TemplatePage.DONE_TEN;
+		return "redirect:/postdeletetenant";
 	}
 
 	@GetMapping("/seetenant")

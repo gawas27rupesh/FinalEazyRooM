@@ -33,12 +33,9 @@
 </head>
 <body>
     <h1><b>SEE ALL TENANT ADDs</b></h1>
-    <div class="alert alert-danger" role="alert">
-		<h5 class="text-center">${msg }</h5>
- </div>
     <div class="container">
         <div class="col-md-8 offset-md-4">
-            <form action="seetenant" method="get">
+            <form action="seetenant" method="post">
                     <table cellspacing="15px" cellpadding="5px">
                        <tr>
                             <td><input type="hidden" name="utype" value="tenant" required></td>

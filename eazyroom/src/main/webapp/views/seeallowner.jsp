@@ -33,9 +33,7 @@
 </head>
 <body>
  <h1>SEE ALL OWNER ADDs</h1>
- <div class="alert alert-danger" role="alert">
-		<h5 class="text-center">${msg }</h5>
- </div>
+ 
 <div class="col-md-8 offset-md-4">
      <form action="seeowner" method="get">
         <table cellspacing="15px" cellpadding="5px">

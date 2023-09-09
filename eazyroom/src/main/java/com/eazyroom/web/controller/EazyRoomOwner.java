@@ -77,7 +77,7 @@ public class EazyRoomOwner {
 			return TemplatePage.LOGIN_PAGE;
 		}
 		this.eazyRoomService.CreateAcnt(eazy);
-		return TemplatePage.DONE_OWNER_PAGE;
+		return "redirect:"+URLConstants.POSTDELETEOWN;
 	}
 
 	@GetMapping(URLConstants.SEEOWNER)

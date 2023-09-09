@@ -49,7 +49,6 @@
                 <td><input type="text" id="name" name="name" placeholder="Enter Capitals Only" value="${eazy.name}" required></td>
             </tr>
             <tr>
-                <td><label for="contno">ENTER CONTACT NO:</label></td>
                 <td><input type="tel" id="contno" name="contno" value="${eazy.contno}" placeholder="Enter Number Only" required></td>
             </tr>
             <tr>
@@ -57,7 +56,6 @@
                 <td><input type="number" id="rent" name="rent" value="${eazy.rent}" placeholder="Enter Rent" required></td>
               </tr>
             <tr>
-                <td><label for="pswd">ENTER PASSWORD:</label></td>
                 <td><input type="password" id="pswd" name="pswd" value="${eazy.pswd}" placeholder="Enter password" required></td>
               </tr>
               <tr>
