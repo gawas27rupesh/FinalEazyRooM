@@ -1,13 +1,14 @@
 package com.eazyroom.web.service;
 
 import java.util.List;
+import java.util.Optional;
 
-import com.eazyroom.web.dto.StateDto;
 import com.eazyroom.web.entities.State;
 
 public interface StateService {
 
 	List<State> getAllState();
 
-	List<StateDto> getAllStateName();
+	Optional<State> getAllStateCities(Integer sid);
+
 }

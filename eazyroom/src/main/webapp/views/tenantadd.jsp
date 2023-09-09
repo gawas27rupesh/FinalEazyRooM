@@ -70,7 +70,7 @@ h1 {
 <body>
 	<h1>CREATE YOUR ADVERTISE</h1>
 	<div class="col-md-8 offset-md-4">
-		<form action="donetenant" method="post">
+		<form action="postdeletetenant" method="get">
 			<table cellspacing="15px" cellpadding="5px">
 				<tr>
 					<td><input type="hidden" id="utype" value="tenant"

@@ -1,6 +1,7 @@
 package com.eazyroom.web.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,14 +27,8 @@ public class StateController {
 
 		@GetMapping("/AllCityOfState/{sid}")
 		@ResponseBody
-		public State getAllCityBySid(@PathVariable("sid") Integer sid) {
-			List<State> allState = this.stateService.getAllState();
-			State s = null;
-			for (State state : allState) {
-				if (state.getSid() == sid) {
-					s = state;
-				}
-			}
-			return s;
+		public Optional<State> getAllCityBySid(@PathVariable("sid") Integer sid) {
+			Optional<State> allState = this.stateService.getAllStateCities(sid);
+			return allState;
 		}
 }
