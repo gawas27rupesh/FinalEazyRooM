@@ -30,7 +30,6 @@ public class LoginController {
 	@GetMapping(URLConstants.LOGIN_PAGE)
 	public String loginPage(HttpServletRequest request, HttpSession session) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute("userData");
-		System.out.println("gawas "+userData);
 		if (Objects.nonNull(userData)) {
 			if(userData.getUtype().equalsIgnoreCase("admin"))
 				return URLConstants.REDIRECT + URLConstants.HOME;
@@ -54,6 +53,7 @@ public class LoginController {
 				userData.setMobile(eazy.getMobile());
 				userData.setPswd(eazy.getPswd());
 				userData.setUtype(eazy.getUtype());
+				userData.setName(eazy.getName());
 				session.setAttribute("userData", userData);
 				System.out.println("yes this is "+userData);
 				session.setMaxInactiveInterval(60 * 60 * 1);
@@ -71,13 +71,14 @@ public class LoginController {
 	}
 	
 	@RequestMapping(URLConstants.REGISTERSUCCESS)
-	public String registersuccess(@ModelAttribute login login, @RequestParam("pswd") String pswd,
+	public String registersuccess(@ModelAttribute login login, @RequestParam("pswd") String pswd,@RequestParam("name") String name,
 			@RequestParam("cpswd") String cpswd, @RequestParam("mobile") String mobile,HttpSession session) {
 		UserLoginDto userData = new UserLoginDto();
 		if(pswd.equals(cpswd)) {
 		this.loginService.registerAct(login);
 		userData.setMobile(mobile);
 		userData.setPswd(pswd);
+		userData.setName(name);
 		session.setAttribute("userData", userData);
 		session.setMaxInactiveInterval(60 * 60 * 1);
 		return URLConstants.REDIRECT + URLConstants.HOME;

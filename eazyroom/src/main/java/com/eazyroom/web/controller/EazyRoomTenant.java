@@ -37,6 +37,8 @@ public class EazyRoomTenant {
 			return TemplatePage.LOGIN_PAGE;
 		}
 		model.addAttribute(AttributeName.UTYPE, userData.getUtype());
+		model.addAttribute("username", userData.getName());
+		System.out.println(userData.getName());
 		return TemplatePage.TEN;
 	}
 

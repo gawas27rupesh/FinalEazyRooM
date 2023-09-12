@@ -22,14 +22,17 @@ public class EazyRoom {
 		if (Objects.nonNull(userData)) {	
 			if(userData.getUtype().equalsIgnoreCase(AttributeName.ADMIN)) {
 				model.addAttribute(AttributeName.UTYPE, userData.getUtype());
+				model.addAttribute("username", userData.getName());
 				return TemplatePage.INDEX_PAGE;
 			}
 			if(userData.getUtype().equalsIgnoreCase(AttributeName.OWNER)) {
 				model.addAttribute(AttributeName.UTYPE, userData.getUtype());
+				model.addAttribute("username", userData.getName());
 				return TemplatePage.OWNER_PAGE;
 			}
 			if(userData.getUtype().equalsIgnoreCase(AttributeName.TENANT)) {
 				model.addAttribute(AttributeName.UTYPE, userData.getUtype());
+				model.addAttribute("username", userData.getName());
 				return TemplatePage.TEN;
 			}
 		}

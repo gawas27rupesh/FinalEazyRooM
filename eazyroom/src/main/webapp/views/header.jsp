@@ -75,7 +75,7 @@
 					</div>
 					<div class="logout col-6" style="text-align: right;">
 						<img
-							src="<c:url value="/resources/logoutlogo.png"/>"	alt="" height="50"> <span id="logout">${name}</span>
+							src="<c:url value="/resources/logoutlogo.png"/>"	alt="" height="50"> <span id="logout">${username}</span>
 						<p class="text-logout">
 							<a href="logout" class="btn btn-outline-danger">Logout</a>
 						</p>

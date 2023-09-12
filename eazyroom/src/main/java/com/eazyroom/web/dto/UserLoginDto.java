@@ -24,5 +24,5 @@ public class UserLoginDto implements Serializable  {
 	private String mobile;	
 	private String pswd;	
 	private String utype;
-
+	private String name;
 }
