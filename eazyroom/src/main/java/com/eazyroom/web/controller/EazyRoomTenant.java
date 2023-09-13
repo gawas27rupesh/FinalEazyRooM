@@ -55,20 +55,17 @@ public class EazyRoomTenant {
 	}
 	
 	@RequestMapping("/deletetenant/{eazyId}")
-	public RedirectView deletetenant(@PathVariable("eazyId") int eazyId, HttpServletRequest request,
+	public String deletetenant(@PathVariable("eazyId") int eazyId, HttpServletRequest request,
 			HttpSession session) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		System.out.println(AttributeName.TENANT+ userData);
 		if (Objects.isNull(userData)) {
-			RedirectView redirectView = new RedirectView();
-			redirectView.setUrl(URLConstants.MAIN);
-			return redirectView;
+			return URLConstants.MAIN;
 		}
 		System.out.println(eazyId);
 		this.eazyRooMService.deleteEazy(eazyId);
-		RedirectView redirectView = new RedirectView();
-		redirectView.setUrl(request.getContextPath() + URLConstants.TENANT_DELETE);
-		return redirectView;
+
+		return "redirect:/postdeletetenant";
 	}
 
 
