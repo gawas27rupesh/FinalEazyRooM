@@ -31,35 +31,44 @@ public class Eazy
 	private int id;
 	
 	
-	@NotEmpty
+
 	private String utype;
 	
-	@NotEmpty
+	
 	private String name;
 	
-	@NotEmpty
+	
 	private String contno;
 	
-	@NotEmpty
+	
 	private String rent;
 	
-	@NotEmpty
+	
 	private String State;
 	
-	@NotEmpty
+	
 	private String city;
 	
-	@NotNull
+	
 	private String pswd;
 	
-	@NotEmpty
+	
 	private String gender;
 	
-	@NotEmpty
+	
 	private String address;
 	
 	@CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
 	private Date date;
+
+	@Override
+	public String toString() {
+		return "Eazy [id=" + id + ", utype=" + utype + ", name=" + name + ", contno=" + contno + ", rent=" + rent
+				+ ", State=" + State + ", city=" + city + ", pswd=" + pswd + ", gender=" + gender + ", address="
+				+ address + ", date=" + date + "]";
+	}
+	
+	
 	
 }

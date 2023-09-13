@@ -115,7 +115,7 @@ public class EazyRoomOwner {
 		}
 		List<Eazy> eazy = null;
 		if (userData.getUtype().equals(AttributeName.ADMIN)) {
-			eazy = eazyRoomService.getAll();
+			eazy = eazyRoomService.getByUtype("owner");
 		} else {
 			eazy = eazyRoomService.seeyourpost(userData.getMobile(), userData.getPswd(), userData.getUtype());
 		}
@@ -135,10 +135,10 @@ public class EazyRoomOwner {
 			return URLConstants.MAIN;
 		}
 		this.eazyRoomService.deleteEazy(eazyId);
-		return "redirect:/postdeletetenant";
+		return "redirect:/postdeleteown";
 	}
 
-	@RequestMapping(URLConstants.UPDATEOWNBYID)
+	@GetMapping(URLConstants.UPDATEOWNBYID)
 	public String updateForm1(@PathVariable("eid") int eid, Model m, HttpSession session) {
 		log.info("9");
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
@@ -146,7 +146,8 @@ public class EazyRoomOwner {
 			return TemplatePage.LOGIN_PAGE;
 		}
 		Eazy eazy = this.eazyRoomService.getEazy(eid);
+		System.out.println(eazy);
 		m.addAttribute(eazy);
-		return TemplatePage.UPDATE_TENANT;
+		return TemplatePage.UPDATE_OWNER;
 	}
 }

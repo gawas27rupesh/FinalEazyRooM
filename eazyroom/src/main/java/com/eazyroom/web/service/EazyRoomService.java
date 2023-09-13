@@ -32,4 +32,6 @@ public interface EazyRoomService {
 
 	Eazy getAccountByMobileOrPassword(String mobile, String pswd);
 
+	List<Eazy> getByUtype(String utype);
+
 }

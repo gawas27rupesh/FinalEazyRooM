@@ -58,13 +58,10 @@ public class EazyRoomTenant {
 	public String deletetenant(@PathVariable("eazyId") int eazyId, HttpServletRequest request,
 			HttpSession session) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
-		System.out.println(AttributeName.TENANT+ userData);
 		if (Objects.isNull(userData)) {
 			return URLConstants.MAIN;
 		}
-		System.out.println(eazyId);
 		this.eazyRooMService.deleteEazy(eazyId);
-
 		return "redirect:/postdeletetenant";
 	}
 
@@ -111,7 +108,7 @@ public class EazyRoomTenant {
 		}
 		List<Eazy> eazy = null;
 		if (userData.getUtype().equals(AttributeName.ADMIN)) {
-			eazy = eazyRooMService.getAll();
+			eazy = eazyRooMService.getByUtype("tenant");
 		} else {
 			eazy = eazyRooMService.seeyourpost(userData.getMobile(), userData.getPswd(), userData.getUtype());
 		}

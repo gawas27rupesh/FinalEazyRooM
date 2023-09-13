@@ -98,7 +98,7 @@ h1 {
 					</select></td>
 				</tr>
 				<tr>
-					<td><label for="city">ENTER ADDRESS:</label></td>
+					<td><label for="address">ENTER ADDRESS:</label></td>
 					<td><input type="text" id="address" name="address"
 						placeholder="Enter room required address" required></td>
 				</tr>

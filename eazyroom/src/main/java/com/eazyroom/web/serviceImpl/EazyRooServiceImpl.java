@@ -103,5 +103,13 @@ public class EazyRooServiceImpl implements EazyRoomService{
 	}
 
 
+
+	@Override
+	public List<Eazy> getByUtype(String utype) {
+		List<Eazy> byUtype = this.eazyRooMRepo.getByUtype(utype);
+		return byUtype;
+	}
+
+
 	
 }
