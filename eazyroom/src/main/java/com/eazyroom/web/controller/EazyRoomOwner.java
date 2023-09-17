@@ -3,6 +3,7 @@ package com.eazyroom.web.controller;
 import java.util.List;
 import java.util.Objects;
 
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,24 +19,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.eazyroom.web.constants.AttributeName;
 import com.eazyroom.web.constants.TemplatePage;
 import com.eazyroom.web.constants.URLConstants;
+import com.eazyroom.web.dto.EazyDto;
 import com.eazyroom.web.dto.UserLoginDto;
 import com.eazyroom.web.entities.Eazy;
 import com.eazyroom.web.service.EazyRoomService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import lombok.extern.log4j.Log4j2;
-
 
 @Controller
 public class EazyRoomOwner {
-	
+
 	Logger log = LoggerFactory.getLogger(EazyRoomOwner.class);
 
 	@Autowired
 	private EazyRoomService eazyRoomService;
-	
-	
+
+	@Autowired
+	ModelMapper modelMapper;
+
 	@GetMapping(URLConstants.OWNER)
 	public String owner(HttpSession session, Model model) {
 		log.info("1");
@@ -44,8 +46,7 @@ public class EazyRoomOwner {
 			return TemplatePage.LOGIN_PAGE;
 		}
 		model.addAttribute(AttributeName.UTYPE, userData.getUtype());
-		model.addAttribute("username",userData.getName());
-		System.out.println(userData.getName());
+		model.addAttribute("username", userData.getName());
 		return TemplatePage.OWNER_PAGE;
 	}
 
@@ -61,15 +62,75 @@ public class EazyRoomOwner {
 		return TemplatePage.OWNER_ADD_PAGE;
 	}
 
-	@RequestMapping(URLConstants.OWNERDELETE)
-	public String ownerdelete(HttpSession session) {
-		log.info("3");
+	@PostMapping(URLConstants.DONEOWNER)
+	public String doneowner(@ModelAttribute Eazy eazy, HttpSession session) {
+		log.info("5");
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN_PAGE;
 		}
-		return TemplatePage.OWNER_DELETE_PAGE;
+		this.eazyRoomService.CreateAcnt(eazy);
+		return "redirect:" + URLConstants.POSTDELETEOWN;
 	}
+
+	@GetMapping(URLConstants.POSTDELETEOWN)
+	public String postdeleteown(Model m, HttpSession session) {
+		log.info("777");
+		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
+		if (Objects.isNull(userData)) {
+			return TemplatePage.LOGIN_PAGE;
+		}
+		List<Eazy> eazy = null;
+		if (userData.getUtype().equals(AttributeName.ADMIN)) {
+			eazy = eazyRoomService.getByUtype("owner");
+		} else {
+			eazy = eazyRoomService.seeyourpost(userData.getMobile(), userData.getPswd(), userData.getUtype());
+		}
+		if (eazy.isEmpty()) {
+			m.addAttribute(AttributeName.MSG, "Invalid Contact Number and Password...!");
+			return null;
+		}
+		m.addAttribute(AttributeName.EAZY, eazy);
+		return "postdeleteown";
+	}
+	
+	@RequestMapping(URLConstants.DELETEOWNBYID)
+	public String deleteown(@PathVariable("eazyId") int eazyId, HttpServletRequest request, HttpSession session) {
+		log.info("8");
+		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
+		if (Objects.isNull(userData)) {
+			return URLConstants.MAIN;
+		}
+		this.eazyRoomService.deleteEazy(eazyId);
+		return "redirect:/postdeleteown";
+	}
+	
+	@GetMapping("/updateown/{eid}")
+	public String updateForm1(@PathVariable("eid") int eid, Model m, HttpSession session) {
+		log.info("9");
+		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
+		if (Objects.isNull(userData)) {
+			return TemplatePage.LOGIN_PAGE;
+		}
+		Eazy eazy = this.eazyRoomService.getEazy(eid);
+		System.out.println(eazy);
+		m.addAttribute(eazy);
+		return "updateown";
+	}
+	
+	@PostMapping("/updateowner")
+	public String pdateOwner(@ModelAttribute EazyDto eazyDto,@RequestParam Integer id,HttpSession session) {
+		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
+		if (Objects.isNull(userData)) {
+			return TemplatePage.LOGIN_PAGE;
+		}
+		System.out.println("yes");
+		this.eazyRoomService.updateUser(eazyDto, id);	
+		return "redirect:/postdeleteown";
+	}
+	//done
+	
+	
 
 	@RequestMapping(URLConstants.SEEALLOWNER)
 	public String seeallowner(HttpSession session) {
@@ -81,16 +142,6 @@ public class EazyRoomOwner {
 		return TemplatePage.SEE_ALL_OWNER_PAGE;
 	}
 
-	@PostMapping(URLConstants.DONEOWNER)
-	public String doneowner(@ModelAttribute Eazy eazy, HttpSession session) {
-		log.info("5");
-		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
-		if (Objects.isNull(userData)) {
-			return TemplatePage.LOGIN_PAGE;
-		}
-		this.eazyRoomService.CreateAcnt(eazy);
-		return "redirect:"+URLConstants.POSTDELETEOWN;
-	}
 
 	@GetMapping(URLConstants.SEEOWNER)
 	public String seeowner(@RequestParam("city") String city, @RequestParam("utype") String utype, Model m,
@@ -105,49 +156,5 @@ public class EazyRoomOwner {
 		m.addAttribute(AttributeName.CITY, city);
 		return TemplatePage.SEE_OWNER_PAGE;
 	}
-
-	@GetMapping(URLConstants.POSTDELETEOWN)
-	public String postdeleteown(Model m, HttpSession session) {
-		log.info("7");
-		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
-		if (Objects.isNull(userData)) {
-			return TemplatePage.LOGIN_PAGE;
-		}
-		List<Eazy> eazy = null;
-		if (userData.getUtype().equals(AttributeName.ADMIN)) {
-			eazy = eazyRoomService.getByUtype("owner");
-		} else {
-			eazy = eazyRoomService.seeyourpost(userData.getMobile(), userData.getPswd(), userData.getUtype());
-		}
-		if (eazy.isEmpty()) {
-			m.addAttribute(AttributeName.MSG, "Invalid Contact Number and Password...!");
-			return URLConstants.OWNERDELETE;
-		}
-		m.addAttribute(AttributeName.EAZY, eazy);
-		return URLConstants.POSTDELETEOWN;
-	}
-
-	@RequestMapping(URLConstants.DELETEOWNBYID)
-	public String deleteown(@PathVariable("eazyId") int eazyId, HttpServletRequest request, HttpSession session) {
-		log.info("8");
-		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
-		if (Objects.isNull(userData)) {
-			return URLConstants.MAIN;
-		}
-		this.eazyRoomService.deleteEazy(eazyId);
-		return "redirect:/postdeleteown";
-	}
-
-	@GetMapping(URLConstants.UPDATEOWNBYID)
-	public String updateForm1(@PathVariable("eid") int eid, Model m, HttpSession session) {
-		log.info("9");
-		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
-		if (Objects.isNull(userData)) {
-			return TemplatePage.LOGIN_PAGE;
-		}
-		Eazy eazy = this.eazyRoomService.getEazy(eid);
-		System.out.println(eazy);
-		m.addAttribute(eazy);
-		return TemplatePage.UPDATE_OWNER;
-	}
+	
 }

@@ -139,7 +139,7 @@ h1 {
 					console.log(data);
 						var dropdown = $("#state");
 						$.each(data, function(index) {
-							$("#state").append("<option value="+ data[index].sid+ ">"+ data[index].sname +"</option>");
+							$("#state").append('<option value="'+ data[index].sname+ '">'+ data[index].sname +'</option>');
 						})
 					},
 					error : function(error) {
@@ -150,9 +150,9 @@ h1 {
 	
 					$('#state').on('change', function () {debugger;
 					$('#city').empty();
-					let sid=$('#state').val();
+					let sname=$('#state').val();
 				    $.ajax({
-					url : "AllCityOfState/"+sid,
+					url : "AllCityOfState/"+sname,
 					method : "GET",
 					dataType : "json",
 					success : function(data) {debugger;

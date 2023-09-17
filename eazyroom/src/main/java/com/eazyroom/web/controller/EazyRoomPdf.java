@@ -1,7 +1,6 @@
 package com.eazyroom.web.controller;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -31,7 +30,7 @@ public class EazyRoomPdf {
 	
 
 	@GetMapping(value =URLConstants.PDF_OWNER, produces = MediaType.APPLICATION_PDF_VALUE)
-	public ResponseEntity<InputStreamResource> ownerReport(@PathVariable("city") String city,HttpSession session) throws IOException {
+	public ResponseEntity<InputStreamResource> ownerReport(@PathVariable("city") String city,HttpSession session) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {	
 			return null;
@@ -50,7 +49,7 @@ public class EazyRoomPdf {
 	}
 	
 	@GetMapping(value = URLConstants.PDF_TENANT, produces = MediaType.APPLICATION_PDF_VALUE)
-	public ResponseEntity<InputStreamResource> tenentReport(@PathVariable("city") String city) throws IOException {
+	public ResponseEntity<InputStreamResource> tenentReport(@PathVariable("city") String city) {
 		String utype=AttributeName.TENANT;
 		List<Eazy> user=this.eazyRooMpdfService.getUserByCity(city, utype);
 		ByteArrayInputStream pdf = GeneratePdfUtil.tenantReport(user,utype);

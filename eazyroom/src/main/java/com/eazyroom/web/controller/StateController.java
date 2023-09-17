@@ -25,10 +25,10 @@ public class StateController {
 			return allState;
 		}
 
-		@GetMapping("/AllCityOfState/{sid}")
+		@GetMapping("/AllCityOfState/{sname}")
 		@ResponseBody
-		public Optional<State> getAllCityBySid(@PathVariable("sid") Integer sid) {
-			Optional<State> allState = this.stateService.getAllStateCities(sid);
+		public Optional<State> getAllCityBySid(@PathVariable("sname") String sname) {
+			Optional<State> allState = this.stateService.getAllStateCities(sname);
 			return allState;
 		}
 }

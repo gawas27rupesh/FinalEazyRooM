@@ -11,8 +11,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,7 +42,7 @@ public class Eazy
 	private String rent;
 	
 	
-	private String State;
+	private String state;
 	
 	
 	private String city;
@@ -65,7 +63,7 @@ public class Eazy
 	@Override
 	public String toString() {
 		return "Eazy [id=" + id + ", utype=" + utype + ", name=" + name + ", contno=" + contno + ", rent=" + rent
-				+ ", State=" + State + ", city=" + city + ", pswd=" + pswd + ", gender=" + gender + ", address="
+				+ ", State=" + state + ", city=" + city + ", pswd=" + pswd + ", gender=" + gender + ", address="
 				+ address + ", date=" + date + "]";
 	}
 	

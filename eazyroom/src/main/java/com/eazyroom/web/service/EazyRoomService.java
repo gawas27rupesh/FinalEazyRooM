@@ -2,6 +2,7 @@ package com.eazyroom.web.service;
 
 import java.util.List;
 
+import com.eazyroom.web.dto.EazyDto;
 import com.eazyroom.web.entities.Eazy;
 
 
@@ -17,6 +18,8 @@ public interface EazyRoomService {
 
 	void deleteEazy(int eazyId);
 
+	EazyDto getEazyDto(int eazyId);
+	
 	Eazy getEazy(int eazyId);
 
 	List<Eazy> seeyourpost(String string, String string2, String utype);
@@ -33,5 +36,13 @@ public interface EazyRoomService {
 	Eazy getAccountByMobileOrPassword(String mobile, String pswd);
 
 	List<Eazy> getByUtype(String utype);
+
+
+	void save(Eazy ez);
+
+	void updateUser(EazyDto eazyDto, Integer eid);
+
+
+
 
 }

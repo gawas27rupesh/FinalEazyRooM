@@ -49,7 +49,7 @@ h1 {
 <body>
 	<h1>CREATE YOUR ADVERTISE</h1>
 	<div class="col-md-8 offset-md-4">
-		<form action="${pageContext.request.contextPath }/donetenant"
+		<form action="${pageContext.request.contextPath }/updatetenant"
 			method="post">
 			<table cellspacing="15px" cellpadding="5px">
 				<tr>
@@ -57,8 +57,8 @@ h1 {
 						name="utype"></td>
 				</tr>
 				<tr>
-					<td><input type="hidden" id="eid" value="${eazy.id }"
-						name="eid"></td>
+					<td><input type="hidden" id="id" value="${eazy.id }"
+						name="id"></td>
 				</tr>
 				<tr>
 					<td><label for="name">ENTER NAME:</label></td>
@@ -77,6 +77,12 @@ h1 {
 				<tr>
 					<td><input type="hidden" id="pswd" name="pswd"
 						value="${eazy.pswd}" required></td>
+				</tr>
+				<tr>
+					<td><label for="state">ENTER STATE:</label></td>
+					<td><input type="text" id="state" name="state"
+						value="${eazy.state}" placeholder="Enter room required state"
+						required></td>
 				</tr>
 				<tr>
 					<td><label for="city">ENTER CITY:</label></td>
@@ -98,7 +104,7 @@ h1 {
 				</tr>
 			</table>
 			<div class="col-md-7 offset-md-1 mt-5">
-				<a href="${pageContext.request.contextPath }/ownerdelete"
+				<a href="${pageContext.request.contextPath }/postdeletetenant"
 					class="btn btn-outline-danger">GO BACK</a>
 				<button type="submit" class="btn btn-outline-success">UPLOAD
 					POST</button>

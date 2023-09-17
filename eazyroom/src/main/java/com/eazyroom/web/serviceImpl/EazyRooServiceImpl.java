@@ -1,10 +1,13 @@
 package com.eazyroom.web.serviceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.eazyroom.web.dto.EazyDto;
 import com.eazyroom.web.entities.Eazy;
 import com.eazyroom.web.repository.EazyRooMRepo;
 import com.eazyroom.web.service.EazyRoomService;
@@ -15,6 +18,9 @@ public class EazyRooServiceImpl implements EazyRoomService{
 	
 	@Autowired
 	private EazyRooMRepo eazyRooMRepo;
+	
+	@Autowired
+	ModelMapper modelMapper;
 
 	@Override
 	public List<Eazy> getUserByCity(String city,String utype) {
@@ -38,6 +44,13 @@ public class EazyRooServiceImpl implements EazyRoomService{
 	public Eazy getEazy(int eazyId) {
 		Eazy byId = this.eazyRooMRepo.getById(eazyId);
 		return byId;
+	}
+	
+	@Override
+	public EazyDto getEazyDto(int eazyId) {
+		Eazy byId = this.eazyRooMRepo.getById(eazyId);
+		EazyDto eazyDto=modelMapper.map(byId, EazyDto.class);
+		return eazyDto;
 	}
 
 	@Override
@@ -66,7 +79,6 @@ public class EazyRooServiceImpl implements EazyRoomService{
 
 	@Override
 	public List<Eazy> getUserByCity(String city) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -74,7 +86,6 @@ public class EazyRooServiceImpl implements EazyRoomService{
 
 	@Override
 	public List<Eazy> getUserByCitygender(String city, String utype, String gender) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -82,7 +93,6 @@ public class EazyRooServiceImpl implements EazyRoomService{
 
 	@Override
 	public List<Eazy> getUsercount(long contno) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -90,7 +100,6 @@ public class EazyRooServiceImpl implements EazyRoomService{
 
 	@Override
 	public Eazy showpro(long cd) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -98,7 +107,6 @@ public class EazyRooServiceImpl implements EazyRoomService{
 
 	@Override
 	public List<Eazy> showAllUser() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -111,5 +119,22 @@ public class EazyRooServiceImpl implements EazyRoomService{
 	}
 
 
+
+	@Override
+	public void save(Eazy ez) {
+		this.eazyRooMRepo.save(ez);
+	}
+
+
+
+	@Override
+	public void updateUser(EazyDto eazyDto, Integer id) {
+		System.out.println(eazyDto);
+		Optional<Eazy> eazy=this.eazyRooMRepo.findById(id);
+		Eazy dtoToEntity=modelMapper.map(eazyDto, Eazy.class);
+		System.out.println("date "+eazy.get().getDate());
+		dtoToEntity.setDate(eazy.get().getDate());
+		this.eazyRooMRepo.save(dtoToEntity);
+	}
 	
 }

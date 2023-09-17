@@ -46,6 +46,7 @@
       <th scope="col">NAME</th>
       <th scope="col">CONT NO</th>
       <th scope="col">RENT</th>
+      <th scope="col">STATE</th>
       <th scope="col">CITY</th>
        <th scope="col">ADDRESS</th>
       <th scope="col">GENDER</th>
@@ -60,6 +61,7 @@
       <th scope="row">${e.name }</th>
       <td>${e.contno }</td>
       <td class="font-weight-bold">&#x20B9;${e.rent }</td>
+      <td>${e.state }</td>
       <td>${e.city }</td>
        <td>${e.address }</td>
       <td>${e.gender }</td>

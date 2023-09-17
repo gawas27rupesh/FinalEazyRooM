@@ -9,6 +9,6 @@ public interface StateService {
 
 	List<State> getAllState();
 
-	Optional<State> getAllStateCities(Integer sid);
+	Optional<State> getAllStateCities(String sname);
 
 }

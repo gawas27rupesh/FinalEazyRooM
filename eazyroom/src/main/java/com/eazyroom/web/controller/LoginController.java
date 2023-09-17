@@ -55,7 +55,6 @@ public class LoginController {
 				userData.setUtype(eazy.getUtype());
 				userData.setName(eazy.getName());
 				session.setAttribute("userData", userData);
-				System.out.println("yes this is "+userData);
 				session.setMaxInactiveInterval(60 * 60 * 1);
 				return URLConstants.REDIRECT + URLConstants.HOME;
 			}
@@ -92,11 +91,9 @@ public class LoginController {
 		if (Objects.isNull(userData)) {
 			return URLConstants.REDIRECT + URLConstants.MAIN;
 		}
-		System.out.println("logout "+userData);
 		session.invalidate();
 		String str = "Logout Successful...!";
 		red.addFlashAttribute("msg", str);
 		return URLConstants.REDIRECT + URLConstants.MAIN;
-	}
-	
+	}	
 }

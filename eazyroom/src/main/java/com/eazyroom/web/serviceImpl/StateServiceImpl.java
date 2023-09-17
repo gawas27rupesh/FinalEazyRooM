@@ -20,18 +20,6 @@ public class StateServiceImpl implements StateService{
 	@Autowired
 	private ModelMapper modelMapper;
 
-	
-
-//	@Override
-//	public List<StateDto> getAllStateName() {
-//		List<StateDto> statedto=new ArrayList<StateDto>();
-//		List<State> findAll = this.stateRepo.findAll();
-//		for(State state:findAll) {
-//			StateDto stateDto = modelMapper.map(state, StateDto.class);
-//			statedto.add(stateDto);
-//		}
-//		return statedto;
-//	}
 
 	@Override
 	public List<State> getAllState() {
@@ -40,8 +28,8 @@ public class StateServiceImpl implements StateService{
 	}
 
 	@Override
-	public Optional<State> getAllStateCities(Integer sid) {
-		Optional<State> byId = this.stateRepo.findById(sid);
+	public Optional<State> getAllStateCities(String sname) {
+		Optional<State> byId = this.stateRepo.findBySname(sname);
 		return byId;
 	}	
 
