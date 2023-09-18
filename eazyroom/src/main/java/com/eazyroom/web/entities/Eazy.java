@@ -53,6 +53,9 @@ public class Eazy
 	
 	private String gender;
 	
+	private String postdate;
+	
+	private String uid;
 	
 	private String address;
 	

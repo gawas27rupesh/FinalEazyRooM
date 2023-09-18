@@ -5,6 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,34 +49,60 @@ h1 {
 	color: aliceblue;
 	font-weight: bold;
 }
+h1 {
+	font-family: 'Times New Roman', Times, serif;
+	height: 60px;
+	background-color: rgb(8, 35, 37);
+	text-align: center;
+	color: aliceblue;
+	font-weight: bold;
+}
+.uid {
+    width: 30px;
+}
+.name {
+    width: 220px;
+}
+.postdate{
+	width:200px;
+}
+#tenant_wrapper {
+	color: #00FFFF;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
+	.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active
+	{
+	color: #FFFF00 !important;
+}
 </style>
 </head>
 <body>
 	<h1>SEE YOUR ALL POSTs.</h1>
 	<div class="container mt-4">
 		<div class="row">
-			<div class="col-md-8 offset-md-1 mt-3">
+			<div class="mt-3">
 
-				<table class="table">
+				<table id="tenant" class="table">
 					<thead class="thead-dark">
 						<tr>
-							<th scope="col">UID</th>
+							<th scope="col" class="uid">UID</th>
 							<th scope="col">UTYPE</th>
-							<th scope="col">NAME</th>
+							<th scope="col" class="name">NAME</th>
 							<th scope="col">CONT NO</th>
 							<th scope="col">RENT</th>
 							<th scope="col">STATE</th>
 							<th scope="col">CITY</th>
 							<th scope="col">ADDRESS</th>
 							<th scope="col">GENDER</th>
-							<th scope="col">POST DATE</th>
+							<th scope="col" class="postdate">POST DATE</th>
 							<th scope="col">ACTION</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${eazy }" var="e">
 							<tr class="text-white">
-								<td>${e.id }</td>
+								<td>${e.uid }</td>
 								<td>${e.utype }</td>
 								<th scope="row">${e.name }</th>
 								<td>${e.contno }</td>
@@ -82,7 +111,7 @@ h1 {
 								<td>${e.city }</td>
 								<td>${e.address }</td>
 								<td>${e.gender }</td>
-								<td>${e.date }</td>
+								<td>${e.postdate }</td>
 								<td><a href="deletetenant/${e.id }"><i
 										class="fa-solid fa-trash text-danger" style="font-size: 23px;"></i></a>
 									<a href="updatetenant/${e.id }"><i
@@ -99,5 +128,13 @@ h1 {
 			</div>
 		</div>
 	</div>
+	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+	<script>
+		new DataTable('#tenant', {
+			order : [ [ 0, 'asc' ] ]
+		});
+	</script>
 </body>
 </html>

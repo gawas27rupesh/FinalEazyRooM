@@ -31,7 +31,7 @@ public class EazyRooServiceImpl implements EazyRoomService{
 	
 
 	@Override
-	public  void CreateAcnt(Eazy eazy) {
+	public  void createAcnt(Eazy eazy) {
 		this.eazyRooMRepo.save(eazy);
 	}
 

@@ -1,5 +1,6 @@
 package com.eazyroom.web.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Objects;
 
@@ -58,7 +59,7 @@ public class EazyRoomTenant {
 		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN_PAGE;
 		}
-		this.eazyRoomService.CreateAcnt(eazy);
+		this.eazyRoomService.createAcnt(eazy);
 		return "redirect:/postdeletetenant";
 	}
 	
@@ -77,6 +78,15 @@ public class EazyRoomTenant {
 		if (eazy.isEmpty()) {
 			m.addAttribute(AttributeName.MSG, "Invalid Contact Number and Password...!");
 			return TemplatePage.TENANT_DELETE;
+		}
+		int tid=1;
+		for (Eazy eazy2 : eazy) {
+			SimpleDateFormat desiredFormat = new SimpleDateFormat("dd-MM-yyyy");
+			String formattedDate = desiredFormat.format(eazy2.getDate());
+			eazy2.setPostdate(formattedDate);
+			eazy2.setUid("TID-"+tid);
+			System.out.println(eazy2.getUid());
+			tid++;
 		}
 		m.addAttribute(AttributeName.EAZY, eazy);
 		return TemplatePage.POST_DELETE_TEN;

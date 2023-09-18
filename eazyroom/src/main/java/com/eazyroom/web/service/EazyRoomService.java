@@ -14,7 +14,7 @@ public interface EazyRoomService {
 
 	List<Eazy> getUsercount(long contno);
 
-	void CreateAcnt(Eazy eazy);
+	void createAcnt(Eazy eazy);
 
 	void deleteEazy(int eazyId);
 
