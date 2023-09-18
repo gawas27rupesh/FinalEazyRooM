@@ -49,6 +49,13 @@ h1 {
 	color: aliceblue;
 	font-weight: bold;
 }
+table.dataTable tbody th, table.dataTable tbody td {
+    padding: 6px 7px;
+}
+table.dataTable thead th, table.dataTable tfoot th {
+    font-weight: bold;
+    font-size: small;
+}
 h1 {
 	font-family: 'Times New Roman', Times, serif;
 	height: 60px;
@@ -58,7 +65,7 @@ h1 {
 	font-weight: bold;
 }
 .uid {
-    width: 30px;
+    width: 40px;
 }
 .name {
     width: 220px;
@@ -79,9 +86,9 @@ h1 {
 </head>
 <body>
 	<h1>SEE YOUR ALL POSTs.</h1>
-	<div class="container mt-4">
+	<div class="container">
 		<div class="row">
-			<div class="mt-3">
+			<div class="">
 
 				<table id="tenant" class="table">
 					<thead class="thead-dark">
@@ -133,7 +140,7 @@ h1 {
 		src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 	<script>
 		new DataTable('#tenant', {
-			order : [ [ 0, 'asc' ] ]
+			order : [ [ 1, 'asc' ] ]
 		});
 	</script>
 </body>

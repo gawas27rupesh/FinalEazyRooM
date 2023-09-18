@@ -58,6 +58,13 @@ h1 {
 .postdate{
 	width:200px;
 }
+table.dataTable tbody th, table.dataTable tbody td {
+    padding: 6px 7px;
+}
+table.dataTable thead th, table.dataTable tfoot th {
+    font-weight: bold;
+    font-size: small;
+}
 #owner_wrapper {
 	color: #00FFFF;
 }
@@ -71,9 +78,9 @@ h1 {
 </head>
 <body>
 	<h1>SEE YOUR ALL POSTs.</h1>
-	<div class="container mt-4">
+	<div class="container">
 		<div class="row">
-			<div class="mt-3">
+			<div class="">
 
 				<table id="owner" class="table">
 					<thead class="thead-dark">
@@ -126,7 +133,7 @@ h1 {
 
 	<script>
 		new DataTable('#owner', {
-			order : [ [ 0, 'asc' ] ]
+			order : [ [ 1, 'asc' ] ]
 		});
 	</script>
 </body>
