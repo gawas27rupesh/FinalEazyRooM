@@ -50,7 +50,7 @@ h1 {
 	font-weight: bold;
 }
 .uid {
-    width: 30px;
+    width: 40px;
 }
 .name {
     width: 220px;
@@ -85,7 +85,7 @@ table.dataTable thead th, table.dataTable tfoot th {
 				<table id="owner" class="table">
 					<thead class="thead-dark">
 						<tr>
-							<th scope="col" class="uid">UID</th>
+							<th scope="col" class="uid">O_No</th>
 							<th scope="col">UTYPE</th>
 							<th scope="col" class="name">NAME</th>
 							<th scope="col">CONT NO</th>
@@ -101,7 +101,7 @@ table.dataTable thead th, table.dataTable tfoot th {
 					<tbody>
 						<c:forEach items="${eazy }" var="e">
 							<tr class="text-white">
-								<td>${e.uid }</td>
+								<td>${e.uid}</td>
 								<td>${e.utype }</td>
 								<th scope="row">${e.name }</th>
 								<td>${e.contno }</td>
@@ -133,7 +133,7 @@ table.dataTable thead th, table.dataTable tfoot th {
 
 	<script>
 		new DataTable('#owner', {
-			order : [ [ 1, 'asc' ] ]
+			order : [ [ 9, 'desc' ] ]
 		});
 	</script>
 </body>

@@ -23,8 +23,8 @@ public class EazyRooServiceImpl implements EazyRoomService{
 	ModelMapper modelMapper;
 
 	@Override
-	public List<Eazy> getUserByCity(String city,String utype) {
-		List<Eazy> listOfOwner=eazyRooMRepo.findByCityAndUtype(city, utype);
+	public List<Eazy> getUserByCity(String state,String city,String utype) {
+		List<Eazy> listOfOwner=eazyRooMRepo.findByStateAndCityAndUtypeOrderByDateDesc(state,city, utype);
 		return listOfOwner;
 	}
 
@@ -114,7 +114,7 @@ public class EazyRooServiceImpl implements EazyRoomService{
 
 	@Override
 	public List<Eazy> getByUtype(String utype) {
-		List<Eazy> byUtype = this.eazyRooMRepo.getByUtype(utype);
+		List<Eazy> byUtype = this.eazyRooMRepo.getByUtypeOrderByDateDesc(utype);
 		return byUtype;
 	}
 

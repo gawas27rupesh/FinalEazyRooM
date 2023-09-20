@@ -79,14 +79,16 @@ public class EazyRoomTenant {
 			m.addAttribute(AttributeName.MSG, "Invalid Contact Number and Password...!");
 			return TemplatePage.TENANT_DELETE;
 		}
-		int tid=1;
+		int uid=1;
 		for (Eazy eazy2 : eazy) {
 			SimpleDateFormat desiredFormat = new SimpleDateFormat("dd-MM-yyyy");
 			String formattedDate = desiredFormat.format(eazy2.getDate());
 			eazy2.setPostdate(formattedDate);
-			eazy2.setUid("TID-"+tid);
-			System.out.println(eazy2.getUid());
-			tid++;
+			if(eazy2.getUtype().equals("tenent"))
+				eazy2.setUid("T.No-"+uid);
+			else
+				eazy2.setUid("O.No-"+uid);
+			uid++;
 		}
 		m.addAttribute(AttributeName.EAZY, eazy);
 		return TemplatePage.POST_DELETE_TEN;
@@ -126,26 +128,28 @@ public class EazyRoomTenant {
 	
 	//done
 	
-	@RequestMapping("/seealltenant")
-	public String seealltenant(HttpSession session) {
+	@RequestMapping(URLConstants.SEEALLOWNER)
+	public String seeallowner(HttpSession session) {
+	
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN_PAGE;
 		}
-		return TemplatePage.SEE_ALL_TEN;
+		return TemplatePage.SEE_ALL_OWNER_PAGE;
 	}
 
-	@GetMapping("/seetenant")
-	public String seetenant(@RequestParam("city") String city, @RequestParam("utype") String utype, Model m,
+	@GetMapping(URLConstants.SEEOWNER)
+	public String seeowner(@RequestParam("state") String state,@RequestParam("city") String city, @RequestParam("utype") String utype, Model m,
 			HttpSession session) {
+	
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN_PAGE;
 		}
-		List<Eazy> eazy = eazyRoomService.getUserByCity(city, utype);
+		List<Eazy> eazy = eazyRoomService.getUserByCity(state,city, utype);
 		m.addAttribute(AttributeName.EAZY, eazy);
 		m.addAttribute(AttributeName.CITY, city);
-		return TemplatePage.SEE_TENANT_PAGE;
+		return TemplatePage.SEE_OWNER_PAGE;
 	}
 
 	

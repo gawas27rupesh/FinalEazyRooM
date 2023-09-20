@@ -91,13 +91,17 @@ public class EazyRoomOwner {
 			m.addAttribute(AttributeName.MSG, "Invalid Contact Number and Password...!");
 			return null;
 		}
-		int oid=1;
+		int uid=1;
 		for (Eazy eazy2 : eazy) {
 			SimpleDateFormat desiredFormat = new SimpleDateFormat("dd-MM-yyyy");
 			String formattedDate = desiredFormat.format(eazy2.getDate());
 			eazy2.setPostdate(formattedDate);
-			eazy2.setUid("OID-"+oid);
-			oid++;
+			System.out.println("====>");
+			if(eazy2.getUtype().equals("tenent"))
+				eazy2.setUid("T.No-"+uid);
+			else
+				eazy2.setUid("O.No-"+uid);
+			uid++;
 		}
 		m.addAttribute(AttributeName.EAZY, eazy);
 		return "postdeleteown";
@@ -129,6 +133,7 @@ public class EazyRoomOwner {
 	
 	@PostMapping("/updateowner")
 	public String pdateOwner(@ModelAttribute EazyDto eazyDto,@RequestParam Integer id,HttpSession session) {
+		log.info("10");
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN_PAGE;
@@ -137,33 +142,46 @@ public class EazyRoomOwner {
 		this.eazyRoomService.updateUser(eazyDto, id);	
 		return "redirect:/postdeleteown";
 	}
+	
+	@RequestMapping("/seealltenant")
+	public String seealltenant(HttpSession session) {
+		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
+		log.info("11");
+		if (Objects.isNull(userData)) {
+			return TemplatePage.LOGIN_PAGE;
+		}
+		return TemplatePage.SEE_ALL_TEN;
+	}	
+
+	
 	//done
 	
-	
-
-	@RequestMapping(URLConstants.SEEALLOWNER)
-	public String seeallowner(HttpSession session) {
-		log.info("4");
-		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
-		if (Objects.isNull(userData)) {
-			return TemplatePage.LOGIN_PAGE;
-		}
-		return TemplatePage.SEE_ALL_OWNER_PAGE;
-	}
-
-
-	@GetMapping(URLConstants.SEEOWNER)
-	public String seeowner(@RequestParam("city") String city, @RequestParam("utype") String utype, Model m,
+	@GetMapping("/seetenant")
+	public String seetenant(@RequestParam("state") String state,@RequestParam("city") String city, @RequestParam("utype") String utype, Model m,
 			HttpSession session) {
-		log.info("6");
+		log.info("12");
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN_PAGE;
 		}
-		List<Eazy> eazy = eazyRoomService.getUserByCity(city, utype);
+		List<Eazy> eazy = eazyRoomService.getUserByCity(state,city, utype);	
+		int uid=1;
+		for (Eazy eazy2 : eazy) {
+			SimpleDateFormat desiredFormat = new SimpleDateFormat("dd-MM-yyyy");
+			String formattedDate = desiredFormat.format(eazy2.getDate());
+			eazy2.setPostdate(formattedDate);
+			System.out.println("==><"+eazy2.getUtype());
+			if(eazy2.getUtype().equals("tenant"))
+				eazy2.setUid("T.No-"+uid);
+			else
+				eazy2.setUid("O.No-"+uid);
+			uid++;
+		}
 		m.addAttribute(AttributeName.EAZY, eazy);
 		m.addAttribute(AttributeName.CITY, city);
-		return TemplatePage.SEE_OWNER_PAGE;
+		return "postdeleteown";
 	}
+
+	
 	
 }

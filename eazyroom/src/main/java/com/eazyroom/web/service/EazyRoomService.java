@@ -30,8 +30,6 @@ public interface EazyRoomService {
 
 	List<Eazy> getAll();
 
-	List<Eazy> getUserByCity(String city, String utype);
-
 
 	Eazy getAccountByMobileOrPassword(String mobile, String pswd);
 
@@ -41,6 +39,8 @@ public interface EazyRoomService {
 	void save(Eazy ez);
 
 	void updateUser(EazyDto eazyDto, Integer eid);
+
+	List<Eazy> getUserByCity(String state, String city, String utype);
 
 
 
