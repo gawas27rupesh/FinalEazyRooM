@@ -49,6 +49,15 @@ h1 {
 	color: aliceblue;
 	font-weight: bold;
 }
+.uid {
+    width: 40px;
+}
+.name {
+    width: 220px;
+}
+.postdate{
+	width:200px;
+}
 table.dataTable tbody th, table.dataTable tbody td {
     padding: 6px 7px;
 }
@@ -65,7 +74,7 @@ h1 {
 	font-weight: bold;
 }
 .uid {
-    width: 40px;
+    width: 60px;
 }
 .name {
     width: 220px;
@@ -75,6 +84,13 @@ h1 {
 }
 #tenant_wrapper {
 	color: #00FFFF;
+}
+table.dataTable tbody th, table.dataTable tbody td {
+    padding: 6px 7px;
+}
+table.dataTable thead th, table.dataTable tfoot th {
+    font-weight: bold;
+    font-size: small;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,

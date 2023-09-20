@@ -91,22 +91,21 @@ public class EazyRoomOwner {
 			m.addAttribute(AttributeName.MSG, "Invalid Contact Number and Password...!");
 			return null;
 		}
-		int uid=1;
+		int uid = 1;
 		for (Eazy eazy2 : eazy) {
 			SimpleDateFormat desiredFormat = new SimpleDateFormat("dd-MM-yyyy");
 			String formattedDate = desiredFormat.format(eazy2.getDate());
 			eazy2.setPostdate(formattedDate);
-			System.out.println("====>");
-			if(eazy2.getUtype().equals("tenent"))
-				eazy2.setUid("T.No-"+uid);
+			if (eazy2.getUtype().equals("tenent"))
+				eazy2.setUid("T.No-" + uid);
 			else
-				eazy2.setUid("O.No-"+uid);
+				eazy2.setUid("O.No-" + uid);
 			uid++;
 		}
 		m.addAttribute(AttributeName.EAZY, eazy);
 		return "postdeleteown";
 	}
-	
+
 	@RequestMapping(URLConstants.DELETEOWNBYID)
 	public String deleteown(@PathVariable("eazyId") int eazyId, HttpServletRequest request, HttpSession session) {
 		log.info("8");
@@ -117,7 +116,7 @@ public class EazyRoomOwner {
 		this.eazyRoomService.deleteEazy(eazyId);
 		return "redirect:/postdeleteown";
 	}
-	
+
 	@GetMapping("/updateown/{eid}")
 	public String updateForm1(@PathVariable("eid") int eid, Model m, HttpSession session) {
 		log.info("9");
@@ -126,23 +125,21 @@ public class EazyRoomOwner {
 			return TemplatePage.LOGIN_PAGE;
 		}
 		Eazy eazy = this.eazyRoomService.getEazy(eid);
-		System.out.println(eazy);
 		m.addAttribute(eazy);
 		return "updateown";
 	}
-	
+
 	@PostMapping("/updateowner")
-	public String pdateOwner(@ModelAttribute EazyDto eazyDto,@RequestParam Integer id,HttpSession session) {
+	public String pdateOwner(@ModelAttribute EazyDto eazyDto, @RequestParam Integer id, HttpSession session) {
 		log.info("10");
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN_PAGE;
 		}
-		System.out.println("yes");
-		this.eazyRoomService.updateUser(eazyDto, id);	
+		this.eazyRoomService.updateUser(eazyDto, id);
 		return "redirect:/postdeleteown";
 	}
-	
+
 	@RequestMapping("/seealltenant")
 	public String seealltenant(HttpSession session) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
@@ -151,37 +148,30 @@ public class EazyRoomOwner {
 			return TemplatePage.LOGIN_PAGE;
 		}
 		return TemplatePage.SEE_ALL_TEN;
-	}	
+	}
 
-	
-	//done
-	
 	@GetMapping("/seetenant")
-	public String seetenant(@RequestParam("state") String state,@RequestParam("city") String city, @RequestParam("utype") String utype, Model m,
-			HttpSession session) {
+	public String seetenant(@RequestParam("state") String state, @RequestParam("city") String city,
+			@RequestParam("utype") String utype, Model m, HttpSession session) {
 		log.info("12");
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN_PAGE;
 		}
-		List<Eazy> eazy = eazyRoomService.getUserByCity(state,city, utype);	
-		int uid=1;
+		List<Eazy> eazy = eazyRoomService.getUserByCity(state, city, utype);
+		int uid = 1;
 		for (Eazy eazy2 : eazy) {
 			SimpleDateFormat desiredFormat = new SimpleDateFormat("dd-MM-yyyy");
 			String formattedDate = desiredFormat.format(eazy2.getDate());
 			eazy2.setPostdate(formattedDate);
-			System.out.println("==><"+eazy2.getUtype());
-			if(eazy2.getUtype().equals("tenant"))
-				eazy2.setUid("T.No-"+uid);
+			if (eazy2.getUtype().equals("tenant"))
+				eazy2.setUid("T.No-" + uid);
 			else
-				eazy2.setUid("O.No-"+uid);
+				eazy2.setUid("O.No-" + uid);
 			uid++;
 		}
 		m.addAttribute(AttributeName.EAZY, eazy);
 		m.addAttribute(AttributeName.CITY, city);
-		return "postdeleteown";
+		return "postdeletetenant";
 	}
-
-	
-	
 }
