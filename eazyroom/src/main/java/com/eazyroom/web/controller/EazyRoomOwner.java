@@ -174,4 +174,36 @@ public class EazyRoomOwner {
 		m.addAttribute(AttributeName.CITY, city);
 		return "postdeletetenant";
 	}
+	
+	@GetMapping("/pdf")
+	public String pdf(Model m, HttpSession session) {
+		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
+		if (Objects.isNull(userData)) {
+			return TemplatePage.LOGIN_PAGE;
+		}
+		List<Eazy> eazy = null;
+		if (userData.getUtype().equals(AttributeName.ADMIN)) {
+			eazy = eazyRoomService.getByUtype("owner");
+		} else {
+			eazy = eazyRoomService.seeyourpost(userData.getMobile(), userData.getPswd(), userData.getUtype());
+		}
+		if (eazy.isEmpty()) {
+			m.addAttribute(AttributeName.MSG, "Invalid Contact Number and Password...!");
+			return null;
+		}
+		int uid = 1;
+		for (Eazy eazy2 : eazy) {
+			SimpleDateFormat desiredFormat = new SimpleDateFormat("dd-MM-yyyy");
+			String formattedDate = desiredFormat.format(eazy2.getDate());
+			eazy2.setPostdate(formattedDate);
+			if (eazy2.getUtype().equals("tenent"))
+				eazy2.setUid("T.No-" + uid);
+			else
+				eazy2.setUid("O.No-" + uid);
+			uid++;
+		}
+		m.addAttribute("utype","TENANT");
+		m.addAttribute(AttributeName.EAZY, eazy);
+		return "pdf";
+	}
 }

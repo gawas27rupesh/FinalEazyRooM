@@ -77,11 +77,10 @@ table.dataTable thead th, table.dataTable tfoot th {
 </style>
 </head>
 <body>
-	<h1>SEE YOUR ALL POSTs.</h1>
+	<h1>SEE ALL POST Of.</h1>
 	<div class="container">
 		<div class="row">
-			<div class="">
-
+					<a href="pdf" class="btn btn-outline-success">DOWNLOAD PDF</a>
 				<table id="owner" class="table">
 					<thead class="thead-dark">
 						<tr>
@@ -126,7 +125,6 @@ table.dataTable thead th, table.dataTable tfoot th {
 				</div>
 			</div>
 		</div>
-	</div>
 	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 	<script
 		src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
