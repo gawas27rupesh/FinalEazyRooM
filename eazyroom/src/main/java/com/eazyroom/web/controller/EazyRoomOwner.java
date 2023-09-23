@@ -172,7 +172,34 @@ public class EazyRoomOwner {
 		}
 		m.addAttribute(AttributeName.EAZY, eazy);
 		m.addAttribute(AttributeName.CITY, city);
+		m.addAttribute("state", state);
+		m.addAttribute("utype", utype);
 		return "postdeletetenant";
+	}
+	
+	@GetMapping("/seetenantpdf/{state}/{city}/{utype}")
+	public String seetenantpdf(@PathVariable("state") String state, @PathVariable("city") String city,
+			@PathVariable("utype") String utype, Model m, HttpSession session) {
+		log.info("12");
+		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
+		if (Objects.isNull(userData)) {
+			return TemplatePage.LOGIN_PAGE;
+		}
+		List<Eazy> eazy = eazyRoomService.getUserByCity(state, city, utype);
+		int uid = 1;
+		for (Eazy eazy2 : eazy) {
+			SimpleDateFormat desiredFormat = new SimpleDateFormat("dd-MM-yyyy");
+			String formattedDate = desiredFormat.format(eazy2.getDate());
+			eazy2.setPostdate(formattedDate);
+			if (eazy2.getUtype().equals("tenant"))
+				eazy2.setUid("T.No-" + uid);
+			else
+				eazy2.setUid("O.No-" + uid);
+			uid++;
+		}
+		m.addAttribute(AttributeName.EAZY, eazy);
+		m.addAttribute(AttributeName.CITY, city);
+		return "pdf";
 	}
 	
 	@GetMapping("/pdf")
