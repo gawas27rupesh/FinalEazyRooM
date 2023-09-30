@@ -81,6 +81,7 @@ table.dataTable thead th, table.dataTable tfoot th {
 	<div class="container">
 		<div class="row">
 					<a href="pdf" class="btn btn-outline-success">DOWNLOAD PDF</a>
+					<a href="ownerexcel" class="btn btn-outline-success">DOWNLOAD EXCEL</a>
 				<table id="owner" class="table">
 					<thead class="thead-dark">
 						<tr>
