@@ -41,6 +41,30 @@ body {
 	font-weight: bold;
 }
 
+.new_hover::before {
+	content: "NEW";
+	background-color: #DA1884;
+	color: #fff;
+	font-size: 8px;
+	font-family: 'FuturaPT-Book';
+	border-radius: 10px;
+	position: absolute;
+	left: 1px;
+	width: 35px;
+	height: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+			0%{
+				opacity: 0;
+			}
+		}
+		
+		
 h1 {
 	font-family: 'Times New Roman', Times, serif;
 	height: 60px;
@@ -117,9 +141,9 @@ table.dataTable thead th, table.dataTable tfoot th {
 	<div class="container">
 		<div class="row">
 			<a href="seetenantpdf/${state}/${city}/${utype}"
-				class="btn btn-outline-success">DOWNLOAD PDF</a> 
-				<a
-				href="tenantexcel" class="btn btn-outline-success">DOWNLOAD EXCEL</a>
+				class="btn btn-outline-success">DOWNLOAD PDF</a> <a
+				href="tenantexcel" class="btn btn-outline-success">DOWNLOAD
+				EXCEL</a>
 
 			<table id="tenant" class="table">
 				<thead class="thead-dark">
@@ -140,8 +164,15 @@ table.dataTable thead th, table.dataTable tfoot th {
 				<tbody>
 					<c:forEach items="${eazy }" var="e">
 						<tr class="text-white">
-							<td>${e.uid }</td>
-							<td>${e.utype }</td>
+							<td><c:choose>
+									<c:when test="${e.newTag == 'New'}">
+										<div class="new_hover">${e.uid}</div>
+									</c:when>
+									<c:otherwise>
+                                        ${e.uid}
+                                    </c:otherwise>
+								</c:choose></td>
+							<td>${e.utype}</td>
 							<th scope="row">${e.name }</th>
 							<td>${e.contno }</td>
 							<td class="font-weight-bold">&#x20B9;${e.rent }</td>
@@ -161,7 +192,7 @@ table.dataTable thead th, table.dataTable tfoot th {
 				</tbody>
 			</table>
 			<div class="container text-center">
-				<a href="owner" class="btn btn-outline-success">GO BACK</a>
+				<a href="tenant" class="btn btn-outline-success">GO BACK</a>
 			</div>
 		</div>
 	</div>

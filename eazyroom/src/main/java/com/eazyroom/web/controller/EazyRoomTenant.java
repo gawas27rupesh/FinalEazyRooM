@@ -1,8 +1,12 @@
 package com.eazyroom.web.controller;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Objects;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,12 +32,15 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class EazyRoomTenant {
+	
+	Logger log = LoggerFactory.getLogger(EazyRoomOwner.class);
 
 	@Autowired
 	private EazyRoomService eazyRoomService;
 
 	@GetMapping(URLConstants.TENANT)
 	public String tenant(HttpSession session, Model model) {
+		log.info("t1");
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN_PAGE;
@@ -45,6 +52,7 @@ public class EazyRoomTenant {
 
 	@GetMapping("/tenantadd")
 	public String tenantadd(HttpSession session, Model model) {
+		log.info("t2");
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN_PAGE;
@@ -56,6 +64,7 @@ public class EazyRoomTenant {
 
 	@PostMapping("/donetenant")
 	public String donetenant(@ModelAttribute Eazy eazy, HttpSession session) {
+		log.info("t3");
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN_PAGE;
@@ -66,6 +75,7 @@ public class EazyRoomTenant {
 
 	@GetMapping("/postdeletetenant")
 	public String postdeletetenant(Model m, HttpSession session) {
+		log.info("t4");
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN_PAGE;
@@ -88,6 +98,14 @@ public class EazyRoomTenant {
 			else
 				eazy2.setUid("O.No-" + uid);
 			uid++;
+			LocalDate createdDate = eazy2.getDate();
+			LocalDate today = LocalDate.now();
+			long daysBetween = ChronoUnit.DAYS.between(createdDate, today);
+			if (daysBetween <= 2) {
+				eazy2.setNewTag("New");
+			} else {
+				eazy2.setNewTag("End");
+			}
 		}
 		m.addAttribute(AttributeName.EAZY, eazy);
 		return TemplatePage.POST_DELETE_TEN;
@@ -95,6 +113,7 @@ public class EazyRoomTenant {
 
 	@GetMapping("/deletetenant/{eazyId}")
 	public String deletetenant(@PathVariable("eazyId") int eazyId, HttpServletRequest request, HttpSession session) {
+		log.info("t5");
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
 			return URLConstants.MAIN;
@@ -105,6 +124,7 @@ public class EazyRoomTenant {
 
 	@GetMapping("/updatetenant/{eid}")
 	public String updateForm2(@PathVariable("eid") int eid, Model m, HttpSession session) {
+		log.info("t6");
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN_PAGE;
@@ -116,6 +136,7 @@ public class EazyRoomTenant {
 
 	@PostMapping("/updatetenant")
 	public String pdateOwner(@ModelAttribute EazyDto eazyDto, @RequestParam Integer id, HttpSession session) {
+		log.info("t6");
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN_PAGE;
@@ -126,6 +147,7 @@ public class EazyRoomTenant {
 
 	@GetMapping(URLConstants.SEEALLOWNER)
 	public String seeallowner(HttpSession session) {
+		log.info("t7");
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN_PAGE;
@@ -136,7 +158,7 @@ public class EazyRoomTenant {
 	@GetMapping(URLConstants.SEEOWNER)
 	public String seeowner(@RequestParam("state") String state, @RequestParam("city") String city,
 			@RequestParam("utype") String utype, Model m, HttpSession session) {
-
+		log.info("t8");
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN_PAGE;
@@ -150,14 +172,23 @@ public class EazyRoomTenant {
 			else
 				eazy2.setUid("O.No-" + uid);
 			uid++;
+			LocalDate createdDate = eazy2.getDate();
+			LocalDate today = LocalDate.now();
+			long daysBetween = ChronoUnit.DAYS.between(createdDate, today);
+			if (daysBetween <= 2) {
+				eazy2.setNewTag("New");
+			} else {
+				eazy2.setNewTag("End");
+			}
 		}
 		m.addAttribute(AttributeName.EAZY, eazy);
 		m.addAttribute(AttributeName.CITY, city);
-		return "postdeleteown";
+		return "postdeletetenant";
 	}
 	
 	@GetMapping("/tenantexcel")
 	public ModelAndView excelTenant(ModelMap mp, HttpSession session) {
+		log.info("t9");
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		List<Eazy> eazy = null;
 		if (userData.getUtype().equals(AttributeName.ADMIN)) {

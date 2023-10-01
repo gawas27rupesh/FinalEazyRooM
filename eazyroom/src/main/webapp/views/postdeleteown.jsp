@@ -49,47 +49,55 @@ h1 {
 	color: aliceblue;
 	font-weight: bold;
 }
+
 .uid {
-    width: 40px;
+	width: 40px;
 }
+
 .name {
-    width: 220px;
+	width: 220px;
 }
-.postdate{
-	width:200px;
+
+.postdate {
+	width: 200px;
 }
+
 table.dataTable tbody th, table.dataTable tbody td {
-    padding: 6px 7px;
+	padding: 6px 7px;
 }
+
 table.dataTable thead th, table.dataTable tfoot th {
-    font-weight: bold;
-    font-size: small;
+	font-weight: bold;
+	font-size: small;
 }
+
 #owner_wrapper {
 	color: #00FFFF;
 }
+
 .new_hover::before {
-			content: "NEW";
-			background-color: #DA1884;
-			color: #fff;
-			font-size: 8px;
-			font-family: 'FuturaPT-Book';
-			border-radius: 10px;
-			position: absolute;
-			left: 1px;
-			width: 35px;
-			height: 15px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			animation: blink 1s linear infinite;
-		}
+	content: "NEW";
+	background-color: #DA1884;
+	color: #fff;
+	font-size: 8px;
+	font-family: 'FuturaPT-Book';
+	border-radius: 10px;
+	position: absolute;
+	left: 1px;
+	width: 35px;
+	height: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	animation: blink 1s linear infinite;
+}
+
 @keyframes blink {
 			0% {
 				opacity: 0;
 			}
 		}
-
+		
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
 	.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active
 	{
@@ -101,63 +109,59 @@ table.dataTable thead th, table.dataTable tfoot th {
 	<h1>SEE ALL POST Of.</h1>
 	<div class="container">
 		<div class="row">
-					<a href="pdf" class="btn btn-outline-success">DOWNLOAD PDF</a>
-					<a href="ownerexcel" class="btn btn-outline-success">DOWNLOAD EXCEL</a>
-				<table id="owner" class="table">
-					<thead class="thead-dark">
-						<tr>
-							<th scope="col" class="uid">O_No</th>
-							<th scope="col">UTYPE</th>
-							<th scope="col" class="name">NAME</th>
-							<th scope="col">CONT NO</th>
-							<th scope="col">RENT</th>
-							<th scope="col">STATE</th>
-							<th scope="col">CITY</th>
-							<th scope="col">ADDRESS</th>
-							<th scope="col">GENDER</th>
-							<th scope="col" class="postdate">POST DATE</th>
-							<th scope="col">ACTION</th>
-						</tr>
-					</thead>
-					<tbody>
-                    <c:forEach items="${eazy}" var="e">
-                        <tr class="text-white">
-                            <td>
-                                <c:choose>
-                                    <c:when test="${e.newTag == 'New'}">
-                                        <div class="new_hover"> ${e.uid}</div>
-                                    </c:when>
-                                    <c:otherwise>
+			<a href="pdf" class="btn btn-outline-success">DOWNLOAD PDF</a> <a
+				href="ownerexcel" class="btn btn-outline-success">DOWNLOAD EXCEL</a>
+			<table id="owner" class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col" class="uid">O_No</th>
+						<th scope="col">UTYPE</th>
+						<th scope="col" class="name">NAME</th>
+						<th scope="col">CONT NO</th>
+						<th scope="col">RENT</th>
+						<th scope="col">STATE</th>
+						<th scope="col">CITY</th>
+						<th scope="col">ADDRESS</th>
+						<th scope="col">GENDER</th>
+						<th scope="col" class="postdate">POST DATE</th>
+						<th scope="col">ACTION</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${eazy}" var="e">
+						<tr class="text-white">
+							<td><c:choose>
+									<c:when test="${e.newTag == 'New'}">
+										<div class="new_hover">${e.uid}</div>
+									</c:when>
+									<c:otherwise>
                                         ${e.uid}
                                     </c:otherwise>
-                                </c:choose>
-                            </td>
-                            <td>${e.utype}</td>
-                            <th scope="row">${e.name}</th>
-                            <td>${e.contno}</td>
-                            <td class="font-weight-bold">&#x20B9;${e.rent}</td>
-                            <td>${e.state}</td>
-                            <td>${e.city}</td>
-                            <td>${e.address}</td>
-                            <td>${e.gender}</td>
-                            <td>${e.postdate}</td>
-                            <td>
-                                <a href="deleteown/${e.id}">
-                                    <i class="fa-solid fa-trash text-danger" style="font-size: 23px;"></i>
-                                </a>
-                                <a href="updateown/${e.id}">
-                                    <i class="fa-solid fa-pen-nib text-primary" style="font-size: 23px;"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-				</table>
-				<div class="container text-center">
-					<a href="owner" class="btn btn-outline-success">GO BACK</a>
-				</div>
+								</c:choose></td>
+							<td>${e.utype}</td>
+							<th scope="row">${e.name}</th>
+							<td>${e.contno}</td>
+							<td class="font-weight-bold">&#x20B9;${e.rent}</td>
+							<td>${e.state}</td>
+							<td>${e.city}</td>
+							<td>${e.address}</td>
+							<td>${e.gender}</td>
+							<td>${e.postdate}</td>
+							<td><a href="deleteown/${e.id}"> <i
+									class="fa-solid fa-trash text-danger" style="font-size: 23px;"></i>
+							</a> <a href="updateown/${e.id}"> <i
+									class="fa-solid fa-pen-nib text-primary"
+									style="font-size: 23px;"></i>
+							</a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<div class="container text-center">
+				<a href="owner" class="btn btn-outline-success">GO BACK</a>
 			</div>
 		</div>
+	</div>
 	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 	<script
 		src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
