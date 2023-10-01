@@ -68,6 +68,22 @@ table.dataTable thead th, table.dataTable tfoot th {
 #owner_wrapper {
 	color: #00FFFF;
 }
+.new_hover::before {
+			content: "NEW";
+			background-color: #00adee;
+			color: #fff;
+			font-size: 7px;
+			font-family: 'FuturaPT-Book';
+			border-radius: 10px;
+			position: absolute;
+			left: 2px;
+			width: 25px;
+			height: 10px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			animation: blink 1s linear infinite;
+		}
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
 	.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active

@@ -1,7 +1,8 @@
 package com.eazyroom.web.entities;
 
 
-import java.util.Date;
+
+import java.time.LocalDate;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -59,16 +60,20 @@ public class Eazy
 	
 	private String address;
 	
+	private String newTag;
+	
 	@CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-	private Date date;
+	@Temporal(TemporalType.DATE)
+	private LocalDate date;
 
 	@Override
 	public String toString() {
 		return "Eazy [id=" + id + ", utype=" + utype + ", name=" + name + ", contno=" + contno + ", rent=" + rent
-				+ ", State=" + state + ", city=" + city + ", pswd=" + pswd + ", gender=" + gender + ", address="
-				+ address + ", date=" + date + "]";
+				+ ", state=" + state + ", city=" + city + ", pswd=" + pswd + ", gender=" + gender + ", postdate="
+				+ postdate + ", uid=" + uid + ", address=" + address + ", newTag=" + newTag + ", date=" + date + "]";
 	}
+
+	
 	
 	
 	

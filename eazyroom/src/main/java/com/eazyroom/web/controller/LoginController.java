@@ -66,6 +66,7 @@ public class LoginController {
 	
 	@RequestMapping(URLConstants.REGISTER)
 	public String register() {
+		System.out.println("register");
 		return TemplatePage.REGISTER_PAGE;	
 	}
 	

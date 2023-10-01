@@ -188,7 +188,7 @@ h1{
       <div class="input-field">
         <input type="password" name="password" placeholder="Password" autocomplete="new-password" required>
       </div>
-      Not a member?<a href="/register" class="link">Sing Up Now</a>
+      Not a member?<a href="/eazyroom/register" class="link">Sing Up Now</a>
     </div>
     <div class="action">
       <button>Sign in</button>

@@ -164,7 +164,7 @@ function checkPasswords() {debugger;
     <div class="container">
       <div class="center">
           <h1>Register</h1>
-          <form method="POST" action="registersuccess">
+          <form method="POST" action="/eazyroom/registersuccess">
               <div class="txt_field">
                   <input type="text" name="name" required>
                   <span></span>
@@ -196,7 +196,7 @@ function checkPasswords() {debugger;
               </div>
               <input name="submit" type="Submit" value="Sign Up">
               <div class="signup_link">
-                  Have an Account ? <a href="/">Login Here</a>
+                  Have an Account ? <a href="/eazyroom">Login Here</a>
               </div>
           </form>
       </div>

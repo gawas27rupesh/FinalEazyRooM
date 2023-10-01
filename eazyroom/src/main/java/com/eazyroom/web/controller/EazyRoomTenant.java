@@ -7,16 +7,20 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.eazyroom.web.constants.AttributeName;
 import com.eazyroom.web.constants.TemplatePage;
 import com.eazyroom.web.constants.URLConstants;
+import com.eazyroom.web.downloadExcel.ExcelDownloadOwner;
+import com.eazyroom.web.downloadExcel.ExcelDownloadTenant;
 import com.eazyroom.web.dto.EazyDto;
 import com.eazyroom.web.dto.UserLoginDto;
 import com.eazyroom.web.entities.Eazy;
@@ -157,6 +161,40 @@ public class EazyRoomTenant {
 		m.addAttribute(AttributeName.EAZY, eazy);
 		m.addAttribute(AttributeName.CITY, city);
 		return "postdeleteown";
+	}
+	
+	@GetMapping("/tenantexcel")
+	public ModelAndView excelTenant(ModelMap mp, HttpSession session) {
+		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
+		List<Eazy> eazy = null;
+		if (userData.getUtype().equals(AttributeName.ADMIN)) {
+			eazy = eazyRoomService.getByUtype("tenant");
+		} else {
+			eazy = eazyRoomService.seeyourpost(userData.getMobile(), userData.getPswd(), userData.getUtype());
+		}
+		if (eazy.isEmpty()) {
+			mp.put(AttributeName.MSG, "Invalid Contact Number and Password...!");
+			return null;
+		}
+		int uid = 1;
+		for (Eazy eazy2 : eazy) {
+			SimpleDateFormat desiredFormat = new SimpleDateFormat("dd-MM-yyyy");
+			String formattedDate = desiredFormat.format(eazy2.getDate());
+			eazy2.setPostdate(formattedDate);
+			if (eazy2.getUtype().equals("tenent"))
+				eazy2.setUid("T.No-" + uid);
+			else
+				eazy2.setUid("O.No-" + uid);
+			uid++;
+		}
+		mp.put("utype","TENANT");
+		mp.put("User Name", userData.getName());
+		mp.put("User Mobile", userData.getMobile());
+		mp.put("User Designation", userData.getUtype());
+		mp.put(AttributeName.EAZY, eazy);
+		
+		return new ModelAndView(new ExcelDownloadTenant());
+		
 	}
 
 	@GetMapping("/all")

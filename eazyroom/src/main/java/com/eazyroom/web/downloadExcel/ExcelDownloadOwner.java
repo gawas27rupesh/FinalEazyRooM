@@ -50,7 +50,7 @@ public class ExcelDownloadOwner extends AbstractXlsView{
 		Drawing drawing = sheet.createDrawingPatriarch();
 		ClientAnchor anchor = drawing.createAnchor(200, 15, 1023, 255, (short) 0, 0, (short) 1, 0);
 		InputStream inputStream = new URL(
-				"https://rntdata.s3.us-east-2.amazonaws.com/RNTPortfolio/prod/Images/rntmailstamp.png")
+				"https://1drv.ms/i/s!AjG1679Hq3p1fsULpxMweuxav5g?e=MVdvEt")
 					.openStream();
 		byte[] bytes = IOUtils.toByteArray(inputStream);
 		int pictureIdx = workbook.addPicture(bytes, Workbook.PICTURE_TYPE_PNG);

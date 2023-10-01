@@ -1,6 +1,8 @@
 package com.eazyroom.web.controller;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Objects;
 
@@ -96,15 +98,26 @@ public class EazyRoomOwner {
 		}
 		int uid = 1;
 		for (Eazy eazy2 : eazy) {
-			SimpleDateFormat desiredFormat = new SimpleDateFormat("dd-MM-yyyy");
-			String formattedDate = desiredFormat.format(eazy2.getDate());
-			eazy2.setPostdate(formattedDate);
+			//SimpleDateFormat desiredFormat = new SimpleDateFormat("dd-MM-yyyy");
+			//String formattedDate = desiredFormat.format(eazy2.getDate());
+			eazy2.setPostdate(eazy2.getDate().toString());
 			if (eazy2.getUtype().equals("tenent"))
 				eazy2.setUid("T.No-" + uid);
 			else
 				eazy2.setUid("O.No-" + uid);
 			uid++;
+			LocalDate createdDate = eazy2.getDate();
+			System.out.println(createdDate);
+			LocalDate today = LocalDate.now();
+			System.out.println(today);
+			long daysBetween = ChronoUnit.DAYS.between(createdDate, today);
+			if (daysBetween <= 2) {
+				eazy2.setNewTag("New");
+			} else {
+				eazy2.setNewTag("End");
+			}
 		}
+		System.out.println(eazy);
 		m.addAttribute(AttributeName.EAZY, eazy);
 		return "postdeleteown";
 	}
@@ -179,7 +192,7 @@ public class EazyRoomOwner {
 		m.addAttribute("utype", utype);
 		return "postdeletetenant";
 	}
-	
+
 	@GetMapping("/seetenantpdf/{state}/{city}/{utype}")
 	public String seetenantpdf(@PathVariable("state") String state, @PathVariable("city") String city,
 			@PathVariable("utype") String utype, Model m, HttpSession session) {
@@ -204,7 +217,7 @@ public class EazyRoomOwner {
 		m.addAttribute(AttributeName.CITY, city);
 		return "pdf";
 	}
-	
+
 	@GetMapping("/pdf")
 	public String pdf(Model m, HttpSession session) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
@@ -232,11 +245,11 @@ public class EazyRoomOwner {
 				eazy2.setUid("O.No-" + uid);
 			uid++;
 		}
-		m.addAttribute("utype","TENANT");
+		m.addAttribute("utype", "TENANT");
 		m.addAttribute(AttributeName.EAZY, eazy);
 		return "pdf";
 	}
-	
+
 	@GetMapping("/ownerexcel")
 	public ModelAndView excelOwner(ModelMap mp, HttpSession session) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
@@ -261,13 +274,13 @@ public class EazyRoomOwner {
 				eazy2.setUid("O.No-" + uid);
 			uid++;
 		}
-		mp.put("utype","TENANT");
+		mp.put("utype", "OWNER");
 		mp.put("User Name", userData.getName());
 		mp.put("User Mobile", userData.getMobile());
 		mp.put("User Designation", userData.getUtype());
 		mp.put(AttributeName.EAZY, eazy);
-		
+
 		return new ModelAndView(new ExcelDownloadOwner());
-		
+
 	}
 }
