@@ -19,7 +19,7 @@ import lombok.Setter;
 public class login {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int lid;
 	
 	@NotEmpty

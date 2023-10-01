@@ -70,19 +70,24 @@ table.dataTable thead th, table.dataTable tfoot th {
 }
 .new_hover::before {
 			content: "NEW";
-			background-color: #00adee;
+			background-color: #DA1884;
 			color: #fff;
-			font-size: 7px;
+			font-size: 8px;
 			font-family: 'FuturaPT-Book';
 			border-radius: 10px;
 			position: absolute;
-			left: 2px;
-			width: 25px;
-			height: 10px;
+			left: 1px;
+			width: 35px;
+			height: 15px;
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			animation: blink 1s linear infinite;
+		}
+@keyframes blink {
+			0% {
+				opacity: 0;
+			}
 		}
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
@@ -115,27 +120,38 @@ table.dataTable thead th, table.dataTable tfoot th {
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${eazy }" var="e">
-							<tr class="text-white">
-								<td>${e.uid}</td>
-								<td>${e.utype }</td>
-								<th scope="row">${e.name }</th>
-								<td>${e.contno }</td>
-								<td class="font-weight-bold">&#x20B9;${e.rent }</td>
-								<td>${e.state }</td>
-								<td>${e.city }</td>
-								<td>${e.address }</td>
-								<td>${e.gender }</td>
-								<td>${e.postdate }</td>
-								<td><a href="deleteown/${e.id }"><i
-										class="fa-solid fa-trash text-danger" style="font-size: 23px;"></i></a>
-									<a href="updateown/${e.id }"><i
-										class="fa-solid fa-pen-nib text-primary"
-										style="font-size: 23px;"></i></a></td>
-							</tr>
-						</c:forEach>
-
-					</tbody>
+                    <c:forEach items="${eazy}" var="e">
+                        <tr class="text-white">
+                            <td>
+                                <c:choose>
+                                    <c:when test="${e.newTag == 'New'}">
+                                        <div class="new_hover"> ${e.uid}</div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        ${e.uid}
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                            <td>${e.utype}</td>
+                            <th scope="row">${e.name}</th>
+                            <td>${e.contno}</td>
+                            <td class="font-weight-bold">&#x20B9;${e.rent}</td>
+                            <td>${e.state}</td>
+                            <td>${e.city}</td>
+                            <td>${e.address}</td>
+                            <td>${e.gender}</td>
+                            <td>${e.postdate}</td>
+                            <td>
+                                <a href="deleteown/${e.id}">
+                                    <i class="fa-solid fa-trash text-danger" style="font-size: 23px;"></i>
+                                </a>
+                                <a href="updateown/${e.id}">
+                                    <i class="fa-solid fa-pen-nib text-primary" style="font-size: 23px;"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
 				</table>
 				<div class="container text-center">
 					<a href="owner" class="btn btn-outline-success">GO BACK</a>

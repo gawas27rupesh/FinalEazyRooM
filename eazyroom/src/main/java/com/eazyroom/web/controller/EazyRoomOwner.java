@@ -98,8 +98,6 @@ public class EazyRoomOwner {
 		}
 		int uid = 1;
 		for (Eazy eazy2 : eazy) {
-			//SimpleDateFormat desiredFormat = new SimpleDateFormat("dd-MM-yyyy");
-			//String formattedDate = desiredFormat.format(eazy2.getDate());
 			eazy2.setPostdate(eazy2.getDate().toString());
 			if (eazy2.getUtype().equals("tenent"))
 				eazy2.setUid("T.No-" + uid);
@@ -107,9 +105,7 @@ public class EazyRoomOwner {
 				eazy2.setUid("O.No-" + uid);
 			uid++;
 			LocalDate createdDate = eazy2.getDate();
-			System.out.println(createdDate);
 			LocalDate today = LocalDate.now();
-			System.out.println(today);
 			long daysBetween = ChronoUnit.DAYS.between(createdDate, today);
 			if (daysBetween <= 2) {
 				eazy2.setNewTag("New");
@@ -117,12 +113,11 @@ public class EazyRoomOwner {
 				eazy2.setNewTag("End");
 			}
 		}
-		System.out.println(eazy);
 		m.addAttribute(AttributeName.EAZY, eazy);
 		return "postdeleteown";
 	}
 
-	@RequestMapping(URLConstants.DELETEOWNBYID)
+	@GetMapping(URLConstants.DELETEOWNBYID)
 	public String deleteown(@PathVariable("eazyId") int eazyId, HttpServletRequest request, HttpSession session) {
 		log.info("8");
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);

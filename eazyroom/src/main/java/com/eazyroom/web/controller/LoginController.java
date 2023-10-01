@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -43,7 +43,7 @@ public class LoginController {
 	
 	
 	
-	@RequestMapping(URLConstants.LOGINSUCCESS)
+	@GetMapping(URLConstants.LOGINSUCCESS)
 	public String loginsuccess(@RequestParam("mobile") String mobile, @RequestParam("password") String password,RedirectAttributes red,
 			HttpSession session, HttpServletRequest req, HttpServletResponse res) {
 		UserLoginDto userData = new UserLoginDto();
@@ -64,20 +64,20 @@ public class LoginController {
 		return URLConstants.REDIRECT + URLConstants.MAIN;
 	}
 	
-	@RequestMapping(URLConstants.REGISTER)
+	@GetMapping(URLConstants.REGISTER)
 	public String register() {
-		System.out.println("register");
 		return TemplatePage.REGISTER_PAGE;	
 	}
 	
-	@RequestMapping(URLConstants.REGISTERSUCCESS)
+	@PostMapping(URLConstants.REGISTERSUCCESS)
 	public String registersuccess(@ModelAttribute login login, @RequestParam("pswd") String pswd,@RequestParam("name") String name,
-			@RequestParam("cpswd") String cpswd, @RequestParam("mobile") String mobile,HttpSession session) {
+			@RequestParam("cpswd") String cpswd, @RequestParam("mobile") String mobile, @RequestParam("utype") String utype,HttpSession session) {
 		UserLoginDto userData = new UserLoginDto();
 		if(pswd.equals(cpswd)) {
 		this.loginService.registerAct(login);
 		userData.setMobile(mobile);
 		userData.setPswd(pswd);
+		userData.setUtype(utype);
 		userData.setName(name);
 		session.setAttribute("userData", userData);
 		session.setMaxInactiveInterval(60 * 60 * 1);
@@ -86,7 +86,7 @@ public class LoginController {
 		return TemplatePage.REGISTER_PAGE;
 	}
 	
-	@RequestMapping("/logout")
+	@GetMapping("/logout")
 	public String logout(HttpSession session,RedirectAttributes red) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute("userData");
 		if (Objects.isNull(userData)) {

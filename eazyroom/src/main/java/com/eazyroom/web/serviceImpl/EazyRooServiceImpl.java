@@ -129,10 +129,8 @@ public class EazyRooServiceImpl implements EazyRoomService{
 
 	@Override
 	public void updateUser(EazyDto eazyDto, Integer id) {
-		System.out.println(eazyDto);
 		Optional<Eazy> eazy=this.eazyRooMRepo.findById(id);
 		Eazy dtoToEntity=modelMapper.map(eazyDto, Eazy.class);
-		System.out.println("date "+eazy.get().getDate());
 		dtoToEntity.setDate(eazy.get().getDate());
 		this.eazyRooMRepo.save(dtoToEntity);
 	}

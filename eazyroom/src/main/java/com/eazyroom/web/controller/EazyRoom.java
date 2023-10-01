@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import com.eazyroom.web.constants.AttributeName;
 import com.eazyroom.web.constants.TemplatePage;
@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class EazyRoom {
 	
-	@RequestMapping(URLConstants.HOME)
+	@GetMapping(URLConstants.HOME)
 	public String home(HttpSession session,Model model) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.nonNull(userData)) {	
