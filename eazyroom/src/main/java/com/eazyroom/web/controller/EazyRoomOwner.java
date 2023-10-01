@@ -1,6 +1,5 @@
 package com.eazyroom.web.controller;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -56,7 +54,7 @@ public class EazyRoomOwner {
 		return TemplatePage.OWNER_PAGE;
 	}
 
-	@RequestMapping(URLConstants.OWNERADD)
+	@GetMapping(URLConstants.OWNERADD)
 	public String owneradd(HttpSession session, Model model) {
 		log.info("2");
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
@@ -151,7 +149,7 @@ public class EazyRoomOwner {
 		return "redirect:/postdeleteown";
 	}
 
-	@RequestMapping("/seealltenant")
+	@GetMapping("/seealltenant")
 	public String seealltenant(HttpSession session) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		log.info("11");
@@ -172,9 +170,7 @@ public class EazyRoomOwner {
 		List<Eazy> eazy = eazyRoomService.getUserByCity(state, city, utype);
 		int uid = 1;
 		for (Eazy eazy2 : eazy) {
-			SimpleDateFormat desiredFormat = new SimpleDateFormat("dd-MM-yyyy");
-			String formattedDate = desiredFormat.format(eazy2.getDate());
-			eazy2.setPostdate(formattedDate);
+			eazy2.setPostdate(eazy2.getDate().toString());
 			if (eazy2.getUtype().equals("tenant"))
 				eazy2.setUid("T.No-" + uid);
 			else
@@ -199,9 +195,7 @@ public class EazyRoomOwner {
 		List<Eazy> eazy = eazyRoomService.getUserByCity(state, city, utype);
 		int uid = 1;
 		for (Eazy eazy2 : eazy) {
-			SimpleDateFormat desiredFormat = new SimpleDateFormat("dd-MM-yyyy");
-			String formattedDate = desiredFormat.format(eazy2.getDate());
-			eazy2.setPostdate(formattedDate);
+			eazy2.setPostdate(eazy2.getDate().toString());
 			if (eazy2.getUtype().equals("tenant"))
 				eazy2.setUid("T.No-" + uid);
 			else
@@ -231,9 +225,7 @@ public class EazyRoomOwner {
 		}
 		int uid = 1;
 		for (Eazy eazy2 : eazy) {
-			SimpleDateFormat desiredFormat = new SimpleDateFormat("dd-MM-yyyy");
-			String formattedDate = desiredFormat.format(eazy2.getDate());
-			eazy2.setPostdate(formattedDate);
+			eazy2.setPostdate(eazy2.getDate().toString());
 			if (eazy2.getUtype().equals("tenent"))
 				eazy2.setUid("T.No-" + uid);
 			else
@@ -260,9 +252,7 @@ public class EazyRoomOwner {
 		}
 		int uid = 1;
 		for (Eazy eazy2 : eazy) {
-			SimpleDateFormat desiredFormat = new SimpleDateFormat("dd-MM-yyyy");
-			String formattedDate = desiredFormat.format(eazy2.getDate());
-			eazy2.setPostdate(formattedDate);
+			eazy2.setPostdate(eazy2.getDate().toString());
 			if (eazy2.getUtype().equals("tenent"))
 				eazy2.setUid("T.No-" + uid);
 			else

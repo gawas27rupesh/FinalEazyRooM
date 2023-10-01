@@ -1,6 +1,5 @@
 package com.eazyroom.web.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,14 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eazyroom.web.constants.AttributeName;
 import com.eazyroom.web.constants.TemplatePage;
 import com.eazyroom.web.constants.URLConstants;
-import com.eazyroom.web.downloadExcel.ExcelDownloadOwner;
 import com.eazyroom.web.downloadExcel.ExcelDownloadTenant;
 import com.eazyroom.web.dto.EazyDto;
 import com.eazyroom.web.dto.UserLoginDto;
@@ -35,7 +32,7 @@ public class EazyRoomTenant {
 	@Autowired
 	private EazyRoomService eazyRoomService;
 
-	@RequestMapping(URLConstants.TENANT)
+	@GetMapping(URLConstants.TENANT)
 	public String tenant(HttpSession session, Model model) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
@@ -46,7 +43,7 @@ public class EazyRoomTenant {
 		return "tenant";
 	}
 
-	@RequestMapping("/tenantadd")
+	@GetMapping("/tenantadd")
 	public String tenantadd(HttpSession session, Model model) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
@@ -85,9 +82,7 @@ public class EazyRoomTenant {
 		}
 		int uid = 1;
 		for (Eazy eazy2 : eazy) {
-			SimpleDateFormat desiredFormat = new SimpleDateFormat("dd-MM-yyyy");
-			String formattedDate = desiredFormat.format(eazy2.getDate());
-			eazy2.setPostdate(formattedDate);
+			eazy2.setPostdate(eazy2.getDate().toString());
 			if (eazy2.getUtype().equals("tenent"))
 				eazy2.setUid("T.No-" + uid);
 			else
@@ -98,7 +93,7 @@ public class EazyRoomTenant {
 		return TemplatePage.POST_DELETE_TEN;
 	}
 
-	@RequestMapping("/deletetenant/{eazyId}")
+	@GetMapping("/deletetenant/{eazyId}")
 	public String deletetenant(@PathVariable("eazyId") int eazyId, HttpServletRequest request, HttpSession session) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
@@ -108,7 +103,7 @@ public class EazyRoomTenant {
 		return "redirect:/postdeletetenant";
 	}
 
-	@RequestMapping("/updatetenant/{eid}")
+	@GetMapping("/updatetenant/{eid}")
 	public String updateForm2(@PathVariable("eid") int eid, Model m, HttpSession session) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
@@ -129,7 +124,7 @@ public class EazyRoomTenant {
 		return "redirect:/postdeletetenant";
 	}
 
-	@RequestMapping(URLConstants.SEEALLOWNER)
+	@GetMapping(URLConstants.SEEALLOWNER)
 	public String seeallowner(HttpSession session) {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
@@ -149,9 +144,7 @@ public class EazyRoomTenant {
 		List<Eazy> eazy = eazyRoomService.getUserByCity(state, city, utype);
 		int uid = 1;
 		for (Eazy eazy2 : eazy) {
-			SimpleDateFormat desiredFormat = new SimpleDateFormat("dd-MM-yyyy");
-			String formattedDate = desiredFormat.format(eazy2.getDate());
-			eazy2.setPostdate(formattedDate);
+			eazy2.setPostdate(eazy2.getDate().toString());
 			if (eazy2.getUtype().equals("tenant"))
 				eazy2.setUid("T.No-" + uid);
 			else
@@ -178,9 +171,7 @@ public class EazyRoomTenant {
 		}
 		int uid = 1;
 		for (Eazy eazy2 : eazy) {
-			SimpleDateFormat desiredFormat = new SimpleDateFormat("dd-MM-yyyy");
-			String formattedDate = desiredFormat.format(eazy2.getDate());
-			eazy2.setPostdate(formattedDate);
+			eazy2.setPostdate(eazy2.getDate().toString());
 			if (eazy2.getUtype().equals("tenent"))
 				eazy2.setUid("T.No-" + uid);
 			else
