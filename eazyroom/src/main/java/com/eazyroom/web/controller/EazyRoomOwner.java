@@ -1,7 +1,10 @@
 package com.eazyroom.web.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -96,7 +99,15 @@ public class EazyRoomOwner {
 		}
 		int uid = 1;
 		for (Eazy eazy2 : eazy) {
-			eazy2.setPostdate(eazy2.getDate().toString());
+			SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+			try {
+				Date date = inputFormat.parse(eazy2.getDate().toString());
+				SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
+				String formattedDate = outputFormat.format(date);
+				eazy2.setPostdate(formattedDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 			if (eazy2.getUtype().equals("tenent"))
 				eazy2.setUid("T.No-" + uid);
 			else
@@ -170,7 +181,15 @@ public class EazyRoomOwner {
 		List<Eazy> eazy = eazyRoomService.getUserByCity(state, city, utype);
 		int uid = 1;
 		for (Eazy eazy2 : eazy) {
-			eazy2.setPostdate(eazy2.getDate().toString());
+			SimpleDateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd");
+			try {
+				Date date = inputFormat.parse(eazy2.getDate().toString());
+				SimpleDateFormat outputFormat=new SimpleDateFormat("dd-MM-yyyy");
+				String formatDate = outputFormat.format(date);
+				eazy2.setPostdate(formatDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 			if (eazy2.getUtype().equals("tenant"))
 				eazy2.setUid("T.No-" + uid);
 			else
@@ -203,7 +222,15 @@ public class EazyRoomOwner {
 		List<Eazy> eazy = eazyRoomService.getUserByCity(state, city, utype);
 		int uid = 1;
 		for (Eazy eazy2 : eazy) {
-			eazy2.setPostdate(eazy2.getDate().toString());
+			SimpleDateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd");
+			try {
+				Date date = inputFormat.parse(eazy2.getDate().toString());
+				SimpleDateFormat outputFormat=new SimpleDateFormat("dd-MM-yyyy");
+				String formatDate = outputFormat.format(date);
+				eazy2.setPostdate(formatDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 			if (eazy2.getUtype().equals("tenant"))
 				eazy2.setUid("T.No-" + uid);
 			else
@@ -242,7 +269,15 @@ public class EazyRoomOwner {
 		}
 		int uid = 1;
 		for (Eazy eazy2 : eazy) {
-			eazy2.setPostdate(eazy2.getDate().toString());
+			SimpleDateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd");
+			try {
+				Date date = inputFormat.parse(eazy2.getDate().toString());
+				SimpleDateFormat outputFormat=new SimpleDateFormat("dd-MM-yyyy");
+				String formatDate = outputFormat.format(date);
+				eazy2.setPostdate(formatDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 			if (eazy2.getUtype().equals("tenent"))
 				eazy2.setUid("T.No-" + uid);
 			else
@@ -270,7 +305,15 @@ public class EazyRoomOwner {
 		}
 		int uid = 1;
 		for (Eazy eazy2 : eazy) {
-			eazy2.setPostdate(eazy2.getDate().toString());
+			SimpleDateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd");
+			try {
+				Date date = inputFormat.parse(eazy2.getDate().toString());
+				SimpleDateFormat outputFormat=new SimpleDateFormat("dd-MM-yyyy");
+				String formatDate = outputFormat.format(date);
+				eazy2.setPostdate(formatDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 			if (eazy2.getUtype().equals("tenent"))
 				eazy2.setUid("T.No-" + uid);
 			else
