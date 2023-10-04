@@ -28,6 +28,7 @@ import com.eazyroom.web.downloadExcel.ExcelDownloadTenant;
 import com.eazyroom.web.dto.EazyDto;
 import com.eazyroom.web.dto.UserLoginDto;
 import com.eazyroom.web.entities.Eazy;
+import com.eazyroom.web.enums.userType;
 import com.eazyroom.web.service.EazyRoomService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -85,7 +86,7 @@ public class EazyRoomTenant {
 		}
 		List<Eazy> eazy = null;
 		if (userData.getUtype().equals(AttributeName.ADMIN)) {
-			eazy = eazyRoomService.getByUtype("tenant");
+			eazy = eazyRoomService.getByUtype(userType.tetant.toString());
 		} else {
 			eazy = eazyRoomService.seeyourpost(userData.getMobile(), userData.getPswd(), userData.getUtype());
 		}
@@ -104,7 +105,7 @@ public class EazyRoomTenant {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			if (eazy2.getUtype().equals("tenent"))
+			if (eazy2.getUtype().equals(userType.tetant.toString()))
 				eazy2.setUid("T.No-" + uid);
 			else
 				eazy2.setUid("O.No-" + uid);
