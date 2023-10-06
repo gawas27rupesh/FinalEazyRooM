@@ -34,20 +34,15 @@ body {
 	font-weight: bold;
 }
 
-
 img {
 	border-radius: 50%;
 }
 
-td {
-	padding-left: 75px;
-	padding-right: 75px
-}
 </style>
 <title>Document</title>
 </head>
 <body>
-<jsp:include page="header.jsp" />
+	<jsp:include page="header.jsp" />
 	<div class="container">
 		<div class="container mt-5">
 			<table>
@@ -55,8 +50,12 @@ td {
 					<td><a href="owneradd"> <img
 							src="<c:url value="/resources/add.jpg"/>" height="230px"
 							width="230px">
-					</a> <a href="owneradd"
-						class="btn btn-outline-primary center mt-4 ml-5">CREATE ADDs</a></td>
+					</a>
+						<button type="button"
+							class="btn btn-outline-primary center mt-4 ml-5"
+							data-toggle="modal" data-target="#exampleModal">CREATE
+							ADDs</button>
+							
 					<td><a href="seealltenant"> <img
 							src="<c:url value="/resources/people.jpg"/>" height="230px"
 							width="230px">
@@ -80,6 +79,120 @@ td {
 			</c:choose>
 		</div>
 	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">CREATE YOUR
+						ADVERTISE</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="doneowner" method="post">
+						<table cellspacing="15px" cellpadding="5px">
+							<tr>
+								<td><input type="hidden" id="utype" value="owner"
+									name="utype"></td>
+							</tr>
+							<tr>
+								<td><input type="hidden" id="contno" name="contno"
+									value="${contno}" required></td>
+							</tr>
+							<tr>
+								<td><input type="hidden" id="pswd" name="pswd"
+									value="${pswd}" required></td>
+							</tr>
+							<tr>
+								<td><label for="name">ENTER NAME:</label></td>
+								<td><input type="text" id="name" name="name"
+									placeholder="Enter Capitals Only" required></td>
+							</tr>
 
+							<tr>
+								<td><label for="rent">ENTER RENT:</label></td>
+								<td><input type="number" id="rent" name="rent"
+									placeholder="Enter Rent" required></td>
+							</tr>
+							<tr>
+								<td><label for="state">ENTER STATE:</label></td>
+								<td><select name="state" id="state" class="input"
+									style="width: 100%; cursor: pointer;">
+										<option value="1" disabled selected>Select</option>
+								</select></td>
+							</tr>
+							<tr>
+								<td><label for="city">ENTER CITY:</label></td>
+								<td><select name="city" id="city" class="input"
+									style="width: 100%; cursor: pointer;">
+										<option value="1" disabled selected>Select</option>
+								</select></td>
+							</tr>
+							<tr>
+								<td><label for="address">ENTER ADDRESS:</label></td>
+								<td><input type="text" id="address" name="address"
+									placeholder="Enter room required address" required></td>
+							</tr>
+							<tr>
+								<td><label for="gender">GENDER:</label></td>
+								<td><input type="radio" id="gender" name="gender"
+									value="male">MALE <input type="radio" id="gender"
+									name="gender" value="female">FEMALE</td>
+							</tr>
+						</table>
+						<div class="col-md-7 offset-md-1 mt-5">
+							<a href="owner" class="btn btn-outline-danger">GO BACK</a>
+							<button type="submit" class="btn btn-outline-success">UPLOAD
+								POST</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+	$(document).ready(
+			function() {debugger;
+				$.ajax({
+					url : "allState",
+					method : "GET",
+					dataType : "json",
+					success : function(data) {debugger;
+					console.log(data);
+						var dropdown = $("#state");
+						$.each(data, function(index) {
+							$("#state").append('<option value="'+ data[index].sname+ '">'+ data[index].sname +'</option>');
+						})
+					},
+					error : function(error) {
+						console.error("Error fetching state data: "+ error);
+					}
+				});
+			});
+	
+					$('#state').on('change', function () {debugger;
+					$('#city').empty();
+					let sname=$('#state').val();
+				    $.ajax({
+					url : "AllCityOfState/"+sname,
+					method : "GET",
+					dataType : "json",
+					success : function(data) {debugger;
+					console.log(data);
+						var dropdown = $("#city");
+						$.each(data.city, function(index) {
+							$("#city").append("<option value="+ data.city[index].cname+ ">"+ data.city[index].cname +"</option>");
+						});
+					},
+					error : function(error) {
+						console.error("Error fetching state data: "+ error);
+					}
+				}); 
+			}); 
+	</script>
 </body>
 </html>
