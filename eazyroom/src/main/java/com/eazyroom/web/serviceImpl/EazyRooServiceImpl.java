@@ -28,8 +28,6 @@ public class EazyRooServiceImpl implements EazyRoomService{
 		return listOfOwner;
 	}
 
-	
-
 	@Override
 	public  void createAcnt(Eazy eazy) {
 		this.eazyRooMRepo.save(eazy);
@@ -59,58 +57,11 @@ public class EazyRooServiceImpl implements EazyRoomService{
 		return list;
 	}
 
-	
-
 	@Override
 	public List<Eazy> getAll() {
 		List<Eazy> findAll = this.eazyRooMRepo.findAll();
 		return findAll;
 	}
-
-
-	@Override
-	public Eazy getAccountByMobileOrPassword(String mobile, String pswd) {
-		//Eazy accountByMobileAndPassword = this.eazyRooMRepo.findByMobileAndPswd(mobile,pswd);
-		//return accountByMobileAndPassword;
-		return null;
-	}
-
-
-
-	@Override
-	public List<Eazy> getUserByCity(String city) {
-		return null;
-	}
-
-
-
-	@Override
-	public List<Eazy> getUserByCitygender(String city, String utype, String gender) {
-		return null;
-	}
-
-
-
-	@Override
-	public List<Eazy> getUsercount(long contno) {
-		return null;
-	}
-
-
-
-	@Override
-	public Eazy showpro(long cd) {
-		return null;
-	}
-
-
-
-	@Override
-	public List<Eazy> showAllUser() {
-		return null;
-	}
-
-
 
 	@Override
 	public List<Eazy> getByUtypeOwner(String utype) {
@@ -126,13 +77,10 @@ public class EazyRooServiceImpl implements EazyRoomService{
 		return byUtype;
 	}
 
-
 	@Override
 	public void save(Eazy ez) {
 		this.eazyRooMRepo.save(ez);
 	}
-
-
 
 	@Override
 	public void updateUser(EazyDto eazyDto, Integer id) {
@@ -141,5 +89,4 @@ public class EazyRooServiceImpl implements EazyRoomService{
 		dtoToEntity.setDate(eazy.get().getDate());
 		this.eazyRooMRepo.save(dtoToEntity);
 	}
-	
 }

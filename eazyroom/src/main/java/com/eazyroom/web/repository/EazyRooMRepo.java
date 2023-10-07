@@ -20,6 +20,7 @@ public interface EazyRooMRepo extends JpaRepository<Eazy, Integer> {
 
 	List<Eazy> findByStateAndCityAndUtypeOrderByDateDesc(String state, String city, String utype);
 
+	
 	List<Eazy> getByUtypeOrderByDateDesc(String utype);
 	
 }

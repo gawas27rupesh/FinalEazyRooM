@@ -196,7 +196,7 @@ public class EazyRoomOwner {
 		m.addAttribute(AttributeName.CITY, city);
 		m.addAttribute("state", state);
 		m.addAttribute("utype", utype);
-		return "postdeletetenant";
+		return "seetenant";
 	}
 
 	@GetMapping("/seetenantpdf/{state}/{city}/{utype}")

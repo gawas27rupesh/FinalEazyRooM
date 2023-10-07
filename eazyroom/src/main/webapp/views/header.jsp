@@ -6,7 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>header</title>
+<script
+	src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
+<link href="https://unpkg.com/intro.js/minified/introjs.min.css"
+	rel="stylesheet">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -19,6 +28,38 @@
 	box-shadow: rgb(58, 164, 250) 0px 3px 10px;
 	background: url('<c:url value="/resources/h1.jpg"/>');
 	background-size: 100% 100%;
+}
+
+.badge-wrap {
+	position: relative;
+	top: -22px;
+	left: 9px;
+	font-size: 8px;
+	height: 13px;
+	width: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 6px solid white;
+	border-radius: 50%;
+}
+
+.badge {
+	position: relative;
+	top: 0px;
+	font-size: 8px;
+	height: 11px;
+	width: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background-color: #00ADEE;
+}
+
+.bell img {
+	width: 26px;
+	font-size: 22px;
 }
 
 .logo {
@@ -73,9 +114,30 @@
 					<div class="heading col-6 text-center">
 						<h1>EazyRooM</h1>
 					</div>
+					<div class="main">
+						<c:forEach items="#" var="t">
+							<div onclick="myFunction()" class="bell">
+								<img src="<c:url value="/resources/bell.png"/>" alt=""> <span
+									class="badge-wrap"> <sup class="badge rounded-circle">2</sup>
+								</span>
+							</div>
+						</c:forEach>
+						
+						<div id="myDropdown" class="dropdown-content2">
+					<c:forEach items="2" var="i">
+						<a onclick="changeCount('NominationCount.do','empBatchId','')">
+							java</a>
+					</c:forEach>
+					<c:forEach items="2" var="i">
+						<a onclick="changeCount('TrainingCount.do','empTrainingId','')">
+							 python</a>
+					</c:forEach>
+				</div>
+						
+					</div>
 					<div class="logout col-6" style="text-align: right;">
-						<img
-							src="<c:url value="/resources/logoutlogo.png"/>"	alt="" height="50"> <span id="logout">${username}</span>
+						<img src="<c:url value="/resources/logoutlogo.png"/>" alt=""
+							height="50"> <span id="logout">${username}</span>
 						<p class="text-logout">
 							<a href="logout" class="btn btn-outline-danger">Logout</a>
 						</p>
@@ -96,6 +158,56 @@
 			$(".text-logout").toggle();
 		});
 	</script>
+	
+	<script>
+		$(document).ready(function() {
+			$(".dropdownHeader").click(function() {
+				$(".dropdown-menu1").toggle();
+			});
+		});
+		$(function() {
+			$('body').on('mouseup', function() {
+				$('.dropdown-menu1').hide();
+			});
+		});
+		function myFunction() {
+
+			var x = document.getElementById("myDropdown");
+			x.classList.toggle("show");
+
+		}
+		$(function() {
+			$('body').on('mouseup', function() {
+				$(".dropdown-content2").removeClass("show");
+			});
+		});
+
+		function changeCount(url,key,id) {
+			var form = document.createElement("form");
+		 	
+	 		form.setAttribute("method", "POST");
+	 		form.setAttribute("action", url); 
+	 
+	 		var input1 = document.createElement("input");
+	 		input1.setAttribute("type", "text");
+	 		input1.name = key;
+	 		input1.value = id; 
+	 		
+	 		form.appendChild(input1);
+	 		document.body.appendChild(form);
+	 		form.submit();
+			
+		}
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			$('#open-popup').click(function() {
+				$('#popup-modal').modal('show');
+			});
+		});
+	</script>
+	
 </body>
 
 </html>

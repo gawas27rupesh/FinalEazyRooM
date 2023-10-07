@@ -205,7 +205,7 @@ public class EazyRoomTenant {
 		}
 		m.addAttribute(AttributeName.EAZY, eazy);
 		m.addAttribute(AttributeName.CITY, city);
-		return "postdeletetenant";
+		return "seeowner";
 	}
 	
 	@GetMapping("/tenantexcel")

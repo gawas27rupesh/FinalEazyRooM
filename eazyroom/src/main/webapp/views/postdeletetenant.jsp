@@ -64,45 +64,6 @@ body {
 			}
 		}
 		
-		
-h1 {
-	font-family: 'Times New Roman', Times, serif;
-	height: 60px;
-	background-color: rgb(8, 35, 37);
-	text-align: center;
-	color: aliceblue;
-	font-weight: bold;
-}
-
-.uid {
-	width: 40px;
-}
-
-.name {
-	width: 220px;
-}
-
-.postdate {
-	width: 200px;
-}
-
-table.dataTable tbody th, table.dataTable tbody td {
-	padding: 6px 7px;
-}
-
-table.dataTable thead th, table.dataTable tfoot th {
-	font-weight: bold;
-	font-size: small;
-}
-
-h1 {
-	font-family: 'Times New Roman', Times, serif;
-	height: 60px;
-	background-color: rgb(8, 35, 37);
-	text-align: center;
-	color: aliceblue;
-	font-weight: bold;
-}
 
 .uid {
 	width: 60px;
@@ -116,10 +77,6 @@ h1 {
 	width: 200px;
 }
 
-#tenant_wrapper {
-	color: #00FFFF;
-}
-
 table.dataTable tbody th, table.dataTable tbody td {
 	padding: 6px 7px;
 }
@@ -128,6 +85,21 @@ table.dataTable thead th, table.dataTable tfoot th {
 	font-weight: bold;
 	font-size: small;
 }
+
+h1 {
+	font-family: 'Times New Roman', Times, serif;
+	height: 60px;
+	background-color: rgb(8, 35, 37);
+	text-align: center;
+	color: aliceblue;
+	font-weight: bold;
+}
+
+
+#tenant_wrapper {
+	color: #00FFFF;
+}
+
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
 	.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active
@@ -192,7 +164,7 @@ table.dataTable thead th, table.dataTable tfoot th {
 				</tbody>
 			</table>
 			<div class="container text-center">
-				<a href="owner" class="btn btn-outline-success">GO BACK</a>
+				<a href="tenant" class="btn btn-outline-success">GO BACK</a>
 			</div>
 		</div>
 	</div>
