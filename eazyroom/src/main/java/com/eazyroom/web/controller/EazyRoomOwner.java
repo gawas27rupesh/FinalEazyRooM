@@ -54,21 +54,11 @@ public class EazyRoomOwner {
 		}
 		model.addAttribute(AttributeName.UTYPE, userData.getUtype());
 		model.addAttribute("username", userData.getName());
+		model.addAttribute(AttributeName.PSWD,userData.getPswd());
 		model.addAttribute("contno",userData.getMobile());
 		return TemplatePage.OWNER_PAGE;
 	}
 
-	@GetMapping(URLConstants.OWNERADD)
-	public String owneradd(HttpSession session, Model model) {
-		log.info("o2");
-		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
-		if (Objects.isNull(userData)) {
-			return TemplatePage.LOGIN_PAGE;
-		}
-		model.addAttribute(AttributeName.CONTNO, userData.getMobile());
-		model.addAttribute(AttributeName.PSWD, userData.getPswd());
-		return TemplatePage.OWNER_ADD_PAGE;
-	}
 
 	@PostMapping(URLConstants.DONEOWNER)
 	public String doneowner(@ModelAttribute Eazy eazy, HttpSession session) {
@@ -90,14 +80,11 @@ public class EazyRoomOwner {
 		}
 		List<Eazy> eazy = null;
 		if (userData.getUtype().equals(AttributeName.ADMIN)) {
-			eazy = eazyRoomService.getByUtype("owner");
+			eazy = eazyRoomService.getByUtypeOwner(userType.owner.toString());
 		} else {
 			eazy = eazyRoomService.seeyourpost(userData.getMobile(), userData.getPswd(), userData.getUtype());
 		}
-		if (eazy.isEmpty()) {
-			m.addAttribute(AttributeName.MSG, "Invalid Contact Number and Password...!");
-			return null;
-		}
+		
 		int uid = 1;
 		for (Eazy eazy2 : eazy) {
 			SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -260,7 +247,7 @@ public class EazyRoomOwner {
 		}
 		List<Eazy> eazy = null;
 		if (userData.getUtype().equals(AttributeName.ADMIN)) {
-			eazy = eazyRoomService.getByUtype("owner");
+			eazy = eazyRoomService.getByUtypeOwner("owner");
 		} else {
 			eazy = eazyRoomService.seeyourpost(userData.getMobile(), userData.getPswd(), userData.getUtype());
 		}
@@ -296,7 +283,7 @@ public class EazyRoomOwner {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		List<Eazy> eazy = null;
 		if (userData.getUtype().equals(AttributeName.ADMIN)) {
-			eazy = eazyRoomService.getByUtype("owner");
+			eazy = eazyRoomService.getByUtypeOwner("owner");
 		} else {
 			eazy = eazyRoomService.seeyourpost(userData.getMobile(), userData.getPswd(), userData.getUtype());
 		}

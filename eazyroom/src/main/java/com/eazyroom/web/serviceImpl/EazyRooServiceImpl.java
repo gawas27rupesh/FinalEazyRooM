@@ -113,11 +113,18 @@ public class EazyRooServiceImpl implements EazyRoomService{
 
 
 	@Override
-	public List<Eazy> getByUtype(String utype) {
+	public List<Eazy> getByUtypeOwner(String utype) {
 		List<Eazy> byUtype = this.eazyRooMRepo.getByUtypeOrderByDateDesc(utype);
+		System.out.println("mic test:==>"+byUtype);
 		return byUtype;
 	}
 
+	@Override
+	public List<Eazy> getByUtypeTenant(String utype) {
+		List<Eazy> byUtype = this.eazyRooMRepo.getByUtypeOrderByDateDesc(utype);
+		System.out.println("mic test:==>"+byUtype);
+		return byUtype;
+	}
 
 
 	@Override

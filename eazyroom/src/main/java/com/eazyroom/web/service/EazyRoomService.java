@@ -33,14 +33,16 @@ public interface EazyRoomService {
 
 	Eazy getAccountByMobileOrPassword(String mobile, String pswd);
 
-	List<Eazy> getByUtype(String utype);
-
-
 	void save(Eazy ez);
 
 	void updateUser(EazyDto eazyDto, Integer eid);
 
 	List<Eazy> getUserByCity(String state, String city, String utype);
+
+	List<Eazy> getByUtypeTenant(String string);
+
+	List<Eazy> getByUtypeOwner(String string);
+
 
 
 

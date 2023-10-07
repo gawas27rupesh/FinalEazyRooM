@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,6 +42,9 @@ public class EazyRoomTenant {
 	@Autowired
 	private EazyRoomService eazyRoomService;
 
+	@Autowired
+	ModelMapper modelMapper;
+	
 	@GetMapping(URLConstants.TENANT)
 	public String tenant(HttpSession session, Model model) {
 		log.info("t1");
@@ -50,6 +54,7 @@ public class EazyRoomTenant {
 		}
 		model.addAttribute(AttributeName.UTYPE, userData.getUtype());
 		model.addAttribute("username", userData.getName());
+		model.addAttribute("contno",userData.getMobile());
 		return "tenant";
 	}
 
@@ -85,14 +90,12 @@ public class EazyRoomTenant {
 		}
 		List<Eazy> eazy = null;
 		if (userData.getUtype().equals(AttributeName.ADMIN)) {
-			eazy = eazyRoomService.getByUtype(userType.tetant.toString());
+			eazy = eazyRoomService.getByUtypeTenant(userType.tetant.toString());
+			System.out.println("data++>"+eazy);
 		} else {
 			eazy = eazyRoomService.seeyourpost(userData.getMobile(), userData.getPswd(), userData.getUtype());
 		}
-		if (eazy.isEmpty()) {
-			m.addAttribute(AttributeName.MSG, "Invalid Contact Number and Password...!");
-			return TemplatePage.TENANT_DELETE;
-		}
+		
 		int uid = 1;
 		for (Eazy eazy2 : eazy) {
 			SimpleDateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd");
@@ -211,7 +214,7 @@ public class EazyRoomTenant {
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		List<Eazy> eazy = null;
 		if (userData.getUtype().equals(AttributeName.ADMIN)) {
-			eazy = eazyRoomService.getByUtype("tenant");
+			eazy = eazyRoomService.getByUtypeTenant("tenant");
 		} else {
 			eazy = eazyRoomService.seeyourpost(userData.getMobile(), userData.getPswd(), userData.getUtype());
 		}
