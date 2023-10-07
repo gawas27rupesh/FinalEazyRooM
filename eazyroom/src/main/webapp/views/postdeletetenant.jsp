@@ -192,7 +192,7 @@ table.dataTable thead th, table.dataTable tfoot th {
 				</tbody>
 			</table>
 			<div class="container text-center">
-				<a href="tenant" class="btn btn-outline-success">GO BACK</a>
+				<a href="owner" class="btn btn-outline-success">GO BACK</a>
 			</div>
 		</div>
 	</div>

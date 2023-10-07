@@ -38,10 +38,6 @@ img {
 	border-radius: 50%;
 }
 
-td {
-	padding-left: 75px;
-	padding-right: 75px;
-}
 </style>
 </head>
 <body>
@@ -55,12 +51,14 @@ td {
 							width="230px">
 					</a> <a href="tenantadd"
 						class="btn btn-outline-primary center mt-4 ml-5">CREATE ADDs</a></td>
+					
 					<td class="container-mt-3"><a href="seeallowner"> <img
 							src="<c:url value="/resources/people.jpg"/>" height="230px"
 							width="230px">
-					</a> <a href="seeallowner"
-						class="btn btn-outline-primary center mt-4 ml-3">SEE ALL OWNER
-							ADDs</a></td>
+					</a>  <button type="button"
+                    class="btn btn-outline-primary center mt-4 ml-5"
+                    data-toggle="modal" data-target="#seeOwner">SEE ALL OWNER</button></td>
+					
 					<td><a href="postdeletetenant"> <img
 							src="<c:url value="/resources/delete.jpg"/>" height="230px"
 							width="230px">
@@ -78,5 +76,106 @@ td {
 			</c:choose>
 		</div>
 	</div>
+	<!-- Modal See Tenant-->
+	<div class="modal fade" id="seeOwner" tabindex="-1"
+		aria-labelledby="seeOwnerLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="seeOwnerLabel">SEE ALL TETANT</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="col-md-10 offset-md-2">
+						<form action="seeowner" method="get">
+							<table cellspacing="15px" cellpadding="5px">
+								<tr>
+									<td><input type="hidden" name="utype" value="owner"
+										required></td>
+								</tr>
+								<tr>
+									<td><label for="state">ENTER STATE:</label></td>
+									<td><select name="state" id="ustate" class="input"
+										style="width: 100%; cursor: pointer;">
+											<option value="1" disabled selected>Select</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td><label for="city">ENTER CITY:</label></td>
+									<td><select name="city" id="ucity" class="input"
+										style="width: 100%; cursor: pointer;">
+											<option value="1" disabled selected>Select</option>
+									</select></td>
+								</tr>
+							</table>
+							<div class="col-md-10 offset-md-3 mt-4">
+								<button type="submit" class="btn btn-outline-success">SEE
+									ALL</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(document).ready(
+				function() {
+					debugger;
+					$.ajax({
+						url : "allState",
+						method : "GET",
+						dataType : "json",
+						success : function(data) {
+							debugger;
+							console.log(data);
+							var dropdown = $("#ustate");
+							$.each(data, function(index) {
+								$("#ustate").append(
+										'<option value="'+ data[index].sname+ '">'
+												+ data[index].sname
+												+ '</option>');
+							})
+						},
+						error : function(error) {
+							console
+									.error("Error fetching state data: "
+											+ error);
+						}
+					});
+				});
+
+		$('#ustate').on(
+				'change',
+				function() {
+					debugger;
+					$('#ucity').empty();
+					let sname = $('#ustate').val();
+					$.ajax({
+						url : "AllCityOfState/" + sname,
+						method : "GET",
+						dataType : "json",
+						success : function(data) {
+							debugger;
+							console.log(data);
+							var dropdown = $("#ucity");
+							$.each(data.city, function(index) {
+								$("#ucity").append(
+										"<option value="+ data.city[index].cname+ ">"
+												+ data.city[index].cname
+												+ "</option>");
+							});
+						},
+						error : function(error) {
+							console
+									.error("Error fetching state data: "
+											+ error);
+						}
+					});
+				});
+	</script>
 </body>
 </html>
