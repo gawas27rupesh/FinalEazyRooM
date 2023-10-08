@@ -53,6 +53,7 @@ public class EazyRoomTenant {
 			return TemplatePage.LOGIN_PAGE;
 		}
 		model.addAttribute(AttributeName.UTYPE, userData.getUtype());
+		model.addAttribute(AttributeName.PSWD,userData.getPswd());
 		model.addAttribute("username", userData.getName());
 		model.addAttribute("contno",userData.getMobile());
 		return "tenant";
@@ -90,7 +91,7 @@ public class EazyRoomTenant {
 		}
 		List<Eazy> eazy = null;
 		if (userData.getUtype().equals(AttributeName.ADMIN)) {
-			eazy = eazyRoomService.getByUtypeTenant(userType.tetant.toString());
+			eazy = eazyRoomService.getByUtypeTenant("tenant");
 			System.out.println("data++>"+eazy);
 		} else {
 			eazy = eazyRoomService.seeyourpost(userData.getMobile(), userData.getPswd(), userData.getUtype());

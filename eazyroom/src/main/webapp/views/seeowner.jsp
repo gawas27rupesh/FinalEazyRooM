@@ -11,6 +11,17 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -91,17 +102,21 @@ table.dataTable thead th, table.dataTable tfoot th {
 	align-items: center;
 	animation: blink 1s linear infinite;
 }
-
 @keyframes blink {
-			0% {
+			0%{
 				opacity: 0;
 			}
 		}
 		
+
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
 	.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active
 	{
 	color: #FFFF00 !important;
+}
+
+h1 {
+	color: green;
 }
 </style>
 </head>
@@ -124,6 +139,7 @@ table.dataTable thead th, table.dataTable tfoot th {
 						<th scope="col">ADDRESS</th>
 						<th scope="col">GENDER</th>
 						<th scope="col" class="postdate">POST DATE</th>
+						<th scope="col">INTEREST</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -146,6 +162,8 @@ table.dataTable thead th, table.dataTable tfoot th {
 							<td>${e.address}</td>
 							<td>${e.gender}</td>
 							<td>${e.postdate}</td>
+							<td>  <input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" data-size="small">
+</td>
 						</tr>
 					</c:forEach>
 				</tbody>

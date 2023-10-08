@@ -80,7 +80,7 @@ public class EazyRoomOwner {
 		}
 		List<Eazy> eazy = null;
 		if (userData.getUtype().equals(AttributeName.ADMIN)) {
-			eazy = eazyRoomService.getByUtypeOwner(userType.owner.toString());
+			eazy = eazyRoomService.getByUtypeOwner("owner");
 		} else {
 			eazy = eazyRoomService.seeyourpost(userData.getMobile(), userData.getPswd(), userData.getUtype());
 		}
