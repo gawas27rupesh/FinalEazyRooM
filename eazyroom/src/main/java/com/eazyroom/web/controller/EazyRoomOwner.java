@@ -138,13 +138,13 @@ public class EazyRoomOwner {
 	}
 
 	@PostMapping("/updateowner")
-	public String pdateOwner(@ModelAttribute EazyDto eazyDto, @RequestParam Integer id, HttpSession session) {
+	public String pdateOwner(@ModelAttribute EazyDto eazyDto, @RequestParam Integer eid, HttpSession session) {
 		log.info("o7");
 		UserLoginDto userData = (UserLoginDto) session.getAttribute(AttributeName.USERDATA);
 		if (Objects.isNull(userData)) {
 			return TemplatePage.LOGIN_PAGE;
 		}
-		this.eazyRoomService.updateUser(eazyDto, id);
+		this.eazyRoomService.updateUser(eazyDto, eid);
 		return "redirect:/postdeleteown";
 	}
 

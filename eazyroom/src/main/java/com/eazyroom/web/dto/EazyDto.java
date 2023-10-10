@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class EazyDto {
 	
-	private int id;
+	private int eid;
 	private String utype;
 	private String name;
 	private String contno;
@@ -25,7 +25,7 @@ public class EazyDto {
 	private Date date;
 	@Override
 	public String toString() {
-		return "EazyDto [id=" + id + ", utype=" + utype + ", name=" + name + ", contno=" + contno + ", rent=" + rent
+		return "EazyDto [id=" + eid + ", utype=" + utype + ", name=" + name + ", contno=" + contno + ", rent=" + rent
 				+ ", state=" + state + ", city=" + city + ", pswd=" + pswd + ", gender=" + gender + ", address="
 				+ address + ", date=" + date + "]";
 	}

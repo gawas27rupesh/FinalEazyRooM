@@ -27,7 +27,7 @@ public class Eazy
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int eid;
 	
 	
 
@@ -68,7 +68,7 @@ public class Eazy
 
 	@Override
 	public String toString() {
-		return "Eazy [id=" + id + ", utype=" + utype + ", name=" + name + ", contno=" + contno + ", rent=" + rent
+		return "Eazy [id=" + eid + ", utype=" + utype + ", name=" + name + ", contno=" + contno + ", rent=" + rent
 				+ ", state=" + state + ", city=" + city + ", pswd=" + pswd + ", gender=" + gender + ", postdate="
 				+ postdate + ", uid=" + uid + ", address=" + address + ", newTag=" + newTag + ", date=" + date + "]";
 	}

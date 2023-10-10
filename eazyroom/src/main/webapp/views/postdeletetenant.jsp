@@ -153,9 +153,9 @@ h1 {
 							<td>${e.address }</td>
 							<td>${e.gender }</td>
 							<td>${e.postdate }</td>
-							<td><a href="deletetenant/${e.id }"><i
+							<td><a href="deletetenant/${e.eid }"><i
 									class="fa-solid fa-trash text-danger" style="font-size: 23px;"></i></a>
-								<a href="updatetenant/${e.id }"><i
+								<a href="updatetenant/${e.eid }"><i
 									class="fa-solid fa-pen-nib text-primary"
 									style="font-size: 23px;"></i></a></td>
 						</tr>

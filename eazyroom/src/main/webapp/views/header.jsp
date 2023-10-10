@@ -93,6 +93,80 @@
 	mix-blend-mode: multiply;
 	filter: contrast(1);
 }
+
+
+
+.bell {
+	 position: relative;
+	margin-right: 16px;
+	margin-top: 16px;
+}
+
+.bell img {
+	width: 20px;
+	font-size: 22px;
+}
+.notification.bold {
+            font-weight: bold;
+        }
+.bellCount{
+	position: relative;
+    top: -22px;
+    left: 9px;
+    font-size: 8px;
+    height: 13px;
+    width: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 6px solid white;
+    border-radius: 50%;
+}
+.bellBadge{
+	position: relative;
+    top: 0px;
+    font-size: 8px;
+    height: 11px;
+    width: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #00ADEE!important;
+    color:white;
+}
+
+.dropdown-content2 {
+	display: none;
+	position: absolute !important;
+	left: -261px !important;
+	top: 47px;
+	min-width: 160px;
+	overflow: auto;
+	z-index: 1;
+	border-radius: 5px;
+	height: auto;
+	max-height: 172px;
+}
+
+ .notification {
+            display: none;
+            background-color: rgb(255, 255, 255);
+            color: #333;
+            text-align: center;
+            padding: 10px;
+            position: absolute; /* Change to absolute positioning */
+            top: 50px; /* Adjust the top position to place it below the bell icon */
+            right: 10px;
+            border: 1px solid rgb(0, 255, 255);
+            border-radius: 4px;
+            z-index: 1;
+        }
+        
+        .notification.active {
+            font-weight: bold;
+        }
+
 </style>
 </head>
 
@@ -116,24 +190,26 @@
 					</div>
 					<div class="main">
 						<c:forEach items="#" var="t">
-							<div onclick="myFunction()" class="bell">
+							<div onclick="showNotification()" class="bell dropbtn">
 								<img src="<c:url value="/resources/bell.png"/>" alt=""> <span
-									class="badge-wrap"> <sup class="badge rounded-circle">2</sup>
+									class="bellCount"> <sup class="bellBadge rounded-circle">1</sup>
 								</span>
 							</div>
 						</c:forEach>
-						
-						<div id="myDropdown" class="dropdown-content2">
-					<c:forEach items="2" var="i">
-						<a onclick="changeCount('NominationCount.do','empBatchId','')">
-							java</a>
-					</c:forEach>
-					<c:forEach items="2" var="i">
-						<a onclick="changeCount('TrainingCount.do','empTrainingId','')">
-							 python</a>
-					</c:forEach>
-				</div>
-						
+
+						<div id="notification" class="notification" onmouseover="removeBold()">
+							<c:forEach items="#" var="i">
+								<a
+									onclick="changeCount('NominationCount.do','empBatchId','#')">
+									Rupesh Gawas Insterested on your post.</a>
+							</c:forEach>
+							<c:forEach items="#" var="i">
+								<a
+									onclick="changeCount('TrainingCount.do','empTrainingId','#')">#
+									Interested</a>
+							</c:forEach>
+						</div>
+
 					</div>
 					<div class="logout col-6" style="text-align: right;">
 						<img src="<c:url value="/resources/logoutlogo.png"/>" alt=""
@@ -158,7 +234,7 @@
 			$(".text-logout").toggle();
 		});
 	</script>
-	
+
 	<script>
 		$(document).ready(function() {
 			$(".dropdownHeader").click(function() {
@@ -182,21 +258,21 @@
 			});
 		});
 
-		function changeCount(url,key,id) {
+		function changeCount(url, key, id) {
 			var form = document.createElement("form");
-		 	
-	 		form.setAttribute("method", "POST");
-	 		form.setAttribute("action", url); 
-	 
-	 		var input1 = document.createElement("input");
-	 		input1.setAttribute("type", "text");
-	 		input1.name = key;
-	 		input1.value = id; 
-	 		
-	 		form.appendChild(input1);
-	 		document.body.appendChild(form);
-	 		form.submit();
-			
+
+			form.setAttribute("method", "POST");
+			form.setAttribute("action", url);
+
+			var input1 = document.createElement("input");
+			input1.setAttribute("type", "text");
+			input1.name = key;
+			input1.value = id;
+
+			form.appendChild(input1);
+			document.body.appendChild(form);
+			form.submit();
+
 		}
 	</script>
 
@@ -207,7 +283,24 @@
 			});
 		});
 	</script>
-	
+<script>
+function showNotification() {
+    var notification = document.getElementById('notification');
+     var isBold = notification.classList.contains('bold');
+    
+    if (isBold) {
+         notification.classList.remove('bold');
+    } else {
+         notification.classList.add('bold');
+    }
+    
+     notification.style.display = 'block';
+}
+function removeBold() {
+    var notification = document.getElementById('notification');
+    notification.classList.remove('bold');
+}
+</script>
 </body>
 
 </html>
